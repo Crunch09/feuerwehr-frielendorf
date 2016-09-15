@@ -1,0 +1,98 @@
+{% extends 'partials/_master.twig' %}
+
+{% block main %}
+
+    <h1>{{ record.title }}</h1>
+
+    {# Output all fields, in the order as defined in the contenttype.
+       To change the generated html and configure the options, see:
+       https://docs.bolt.cm/templates/fields-tag #}
+  <table>
+     <tbody>
+      <tr>
+        <td>Einsatzart</td>
+        {% set relatedrecords = record.related('operationtypes', record.relation.operationtypes[0]) %}
+        <td>{{relatedrecords[0].title}}</td>
+      </tr>
+      <tr>
+        <td>Einsatzort</td>
+        <td>{{record.location}}</td>
+      </tr>
+      <tr>
+        <td>Alarmierung</td>
+        <td>{{record.beginat}}</td>
+      </tr>
+      <tr>
+        <td>Einsatzende</td>
+        <td>{{record.endat}}</td>
+      </tr>
+      <tr>
+        <td>Einsatzleiter</td>
+        <td>{{record.incidentcommander}}</td>
+      </tr>
+      <tr>
+        <td>Feuerwehren der Gemeinde Frielendorf</td>
+        <td>
+          {% set vehicles = record.related('vehicles') %}
+          {% set internvehicles = [] %}
+          {% set externvehicles = [] %}
+          {% set departments = [] %}
+
+          {% for vehicle in vehicles %}
+            {% set department = vehicle.related('departments') %}
+            {% if department[0].title not in departments %}
+              {% set departments = departments|merge([department[0].title]) %}
+            {% endif %}
+            {% set internvehicles = internvehicles|merge([{department: department[0], vehicle: vehicle}]) %}
+          {% endfor %}
+          {% set fub = "" %}
+          {% for dp in departments|sort %}
+            {% if fub != dp %}
+              <h6>{{dp}}</h6><ul>
+                {% for vehicle in internvehicles if vehicle.department.title == dp %}
+                  <li>{{ vehicle.vehicle.title }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% set fub = dp %}
+          {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ record.coordinates.latitude }},{{ record.coordinates.longitude }}&zoom=14&size=617x300&sensor=false&markers={{ record.coordinates.latitude }},{{ record.coordinates.longitude }}">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          {{record.description|markdown}}
+        </td>
+      </tr>
+     </tbody>
+   </table>
+   <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+      <ul class="orbit-container">
+        <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+        <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+         {% for image in record.imagelist %}
+          <li class="orbit-slide">
+            <img class="orbit-image" src="{{ thumbnail(image.filename) }}" alt="{{image.title}}">
+            <figcaption class="orbit-caption">{{image.title}}</figcaption>
+          </li>
+         {% endfor %}
+      </ul>
+      <nav class="orbit-bullets">
+        <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+        <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+        <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+        <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+        <button data-slide="4"><span class="show-for-sr">Fourth slide details.</span></button>
+      </nav>
+    </div>
+
+
+
+
+    {% include 'partials/_recordfooter.twig' with { 'record': record, 'extended': true } %}
+
+{% endblock main %}
