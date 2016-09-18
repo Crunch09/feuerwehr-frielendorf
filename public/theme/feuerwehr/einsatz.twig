@@ -11,7 +11,8 @@
      <tbody>
       <tr>
         <td>Einsatzart</td>
-        <td>{{record.operationtype}}</td>
+        {% setcontent operationtype = "operationtypes" where { 'id': record.operationtype } returnsingle %}
+        <td>{{operationtype.title}}</td>
       </tr>
       <tr>
         <td>Einsatzort</td>
