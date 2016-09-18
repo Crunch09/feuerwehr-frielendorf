@@ -290,6 +290,73 @@ departments:
         image:
             label: Bild
             type: image
+            group: Erweitert
+        facebook:
+            label: Facebook-URL
+            type: text
+            class: large
+            pattern: url
+            group: Erweitert
+        coordinates:
+            label: Standort
+            type: geolocation
+            group: Erweitert
+        schedule:
+            label: Dienstplan
+            type: file
+            accept_file_types: [ pdf ]
+            group: Erweitert
+        appointes:
+            label: Amtsträger
+            type: repeater
+            group: Amtsträger
+            fields:
+              task:
+                label: Amt
+                type: select
+                values: tasks/title
+                keys: internaltitle
+                sort: title
+                autocomplete: true
+              firstname:
+                label: Vorname
+                type: text
+                class: narrow
+              lastname:
+                label: Nachname
+                type: text
+                class: narrow
+              street:
+                label: Straße
+                type: text
+                class: narrow
+              houseno:
+                label: Hausnummer
+                type: text
+                class: narrow
+              zipcode:
+                label: PLZ
+                type: text
+                pattern: ^[0-9]{5}$
+                class: narrow
+              city:
+                label: Ort
+                type: text
+                class: narrow
+              email:
+                label: Email
+                type: text
+                class: narrow
+                pattern: email
+              phone:
+                label: Telefonnr.
+                type: text
+                class: narrow
+              profileimage:
+                label: Profilbild
+                type: image
+                extensions: [gif, jpg, png]
+
     relations:
         vehicles:
             multiple: true
@@ -311,6 +378,13 @@ operations:
             required: true
             type: text
             class: large
+        operationtype:
+            required: true
+            type: select
+            values: operationtypes/title
+            label: Einsatzart
+            order: title
+            autocomplete: true
         incidentcommander:
             label: Einsatzleiter
             type: text
@@ -342,17 +416,29 @@ operations:
             label: Fahrzeuge zuweisen
             order: title
             format: '{{item.title}} ({{item.radiocode}})'
-        operationtypes:
-            required: true
-            multiple: false
-            label: Einsatzart
-            order: title
     show_on_dashboard: true
     viewless: false
     searchable: true
     show_in_menu: Feuerwehr
 
-
+tasks:
+    name: Ämter
+    singular_name: Amt
+    fields:
+        title:
+            label: Titel
+            required: true
+            type: text
+            class: large
+        internaltitle:
+            label: Interner Titel
+            type: text
+            class: narrow
+    show_on_dashboard: false
+    viewless: true
+    searchable: false
+    default_status: published
+    show_in_menu: Feuerwehr
 # Possible field types:
 #
 # text - varchar(256) - input type text.
