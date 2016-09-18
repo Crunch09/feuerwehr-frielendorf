@@ -48,25 +48,26 @@
         {% set lastYear = requestedYear - 1 %}
         {% set nextYear = requestedYear + 1 %}
         {% set fdate = '> 31-12-' ~ lastYear ~ ' 23:59:59 && < 01-01-' ~ nextYear %}
-        {% setcontent records = 'operations' where { beginat: fdate } %}
+        {% if requestedType == "" %}
+          {% setcontent records = 'operations' where { beginat: fdate } orderby '-beginat' %}
+        {% else %}
+          {% setcontent records = 'operations' where { beginat: fdate, operationtype: requestedType } orderby '-beginat' %}
+        {% endif %}
         {% set operations = [] %}
 
         {% for record in records %}
-          {% if requestedType == "" or requestedType == record.relation.operationtypes[0] %}
-              {% if requestedDepartment == "" %}
-                {% set operations = operations|merge([record]) %}
-              {% else %}
-                {% set vehicles = record.related('vehicles') %}
-                {% set notFound = true %}
-                {% for vehicle in vehicles if notFound %}
-                  {% if vehicle.relation.departments[0] == requestedDepartment %}
-                    {% set operations = operations|merge([record]) %}
-                    {% set notFound = false %}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-
-          {% endif %}
+            {% if requestedDepartment == "" %}
+              {% set operations = operations|merge([record]) %}
+            {% else %}
+              {% set vehicles = record.related('vehicles') %}
+              {% set notFound = true %}
+              {% for vehicle in vehicles if notFound %}
+                {% if vehicle.relation.departments[0] == requestedDepartment %}
+                  {% set operations = operations|merge([record]) %}
+                  {% set notFound = false %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
         {% endfor %}
 
         <ul class="no-bullet operations-list">
