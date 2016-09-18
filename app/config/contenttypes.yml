@@ -229,6 +229,130 @@ blocks:
     icon_many: "fa:cubes"
     icon_one: "fa:cube"
 
+operationtypes:
+    name: Einsatzarten
+    singular_name: Einsatzart
+    fields:
+        title:
+            label: Titel
+            required: true
+            type: text
+            class: large
+    show_on_dashboard: false
+    viewless: true
+    default_status: published
+    searchable: false
+    show_in_menu: Feuerwehr
+
+vehicles:
+    name: Fahrzeuge
+    singular_name: Fahrzeug
+    fields:
+        title:
+            label: Titel
+            required: true
+            type: text
+            class: large
+        radiocode:
+            label: Funkrufname
+            type: text
+            class: narrow
+        shorttitle:
+            label: Kurztitel
+            type: text
+            class: narrow
+        description:
+            label: Beschreibung
+            type: markdown
+        imagelist:
+            label: Bilder
+            type: imagelist
+    show_on_dashboard: true
+    viewless: false
+    default_status: published
+    searchable: false
+    show_in_menu: Feuerwehr
+
+departments:
+    name: Einheiten
+    singular_name: Einheit
+    fields:
+        title:
+            label: Titel
+            required: true
+            type: text
+            class: large
+        intern:
+            type: checkbox
+        description:
+            label: Beschreibung
+            type: markdown
+        image:
+            label: Bild
+            type: image
+    relations:
+        vehicles:
+            multiple: true
+            label: Fahrzeuge zuweisen
+            order: title
+            format: '{{item.title}} ({{item.radiocode}})'
+    show_on_dashboard: true
+    viewless: false
+    default_status: published
+    searchable: true
+    show_in_menu: Feuerwehr
+
+operations:
+    name: Einsätze
+    singular_name: Einsatz
+    fields:
+        title:
+            label: Titel
+            required: true
+            type: text
+            class: large
+        incidentcommander:
+            label: Einsatzleiter
+            type: text
+        beginat:
+            label: Alarmierung
+            required: true
+            type: datetime
+        endat:
+            label: Einsatzende
+            required: true
+            type: datetime
+        location:
+            label: Einsatzort
+            required: true
+            type: text
+            class: large
+        coordinates:
+            label: Koordinaten
+            type: geolocation
+        description:
+            label: Einsatzbericht
+            type: markdown
+        imagelist:
+            label: Bilder
+            type: imagelist
+    relations:
+        vehicles:
+            multiple: true
+            label: Fahrzeuge zuweisen
+            order: title
+            format: '{{item.title}} ({{item.radiocode}})'
+        operationtypes:
+            required: true
+            multiple: false
+            label: Einsatzart
+            order: title
+    show_on_dashboard: true
+    viewless: false
+    searchable: true
+    show_in_menu: Feuerwehr
+
+
 # Possible field types:
 #
 # text - varchar(256) - input type text.
