@@ -11,8 +11,7 @@
      <tbody>
       <tr>
         <td>Einsatzart</td>
-        {% set relatedrecords = record.related('operationtypes', record.relation.operationtypes[0]) %}
-        <td>{{relatedrecords[0].title}}</td>
+        <td>{{record.operationtype}}</td>
       </tr>
       <tr>
         <td>Einsatzort</td>
