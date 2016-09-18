@@ -101,3 +101,24 @@ p.meta {
         margin: 1.5em 0;
     }
 }
+
+// Operations stuff
+.operations-list{
+  span.date{
+    float: right;
+  }
+  li{
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+    list-style-position:inside;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover{
+      background-color: $accordion-item-background-hover;
+    }
+  }
+}

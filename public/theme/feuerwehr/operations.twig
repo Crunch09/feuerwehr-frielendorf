@@ -1,35 +1,80 @@
 {% extends 'partials/_master.twig' %}
 
 {% block main %}
-        {# This template is used for 'listings': Generic pages that list a number of
-           records from a certain contenttype. These records are available as an array
-           called 'records'. In the for-loop below, we iterate over the records that
-           are on this page. It can be used for overview pages like 'all entries', or
-           'all records tagged with kittens'. #}
-
-        {# If used for listing a taxonomy, we add a heading.: #}
-        {% if taxonomytype is defined %}
-            <h1>
-                {{ __('general.phrase.overview-for') }}
-                {% if taxonomy.options[slug] is defined %}
-                    {{ taxonomy.options[slug] }}
-                {% else %}
-                    {{ slug }}
-                {% endif %}
-            </h1>
-            {# Taxonomies are fetched unordered by design except if 'has_sortorder'
-               is set to true. This way we keep 'grouping' intact in the listing. #}
-            {% if not taxonomy.has_sortorder %}
-                {# If we specified an order in config.yml, sort them here, accordingly: #}
-                {% set records = records|order(app.config.get('general/listing_sort')) %}
-            {% endif %}
+        {% set requestedYear = app.request.query.get('year') %}
+        {% if requestedYear is null %}
+          {% set requestedYear = "now"|date("Y") %}
         {% endif %}
+        {% set requestedDepartment = app.request.query.get('department')|default("") %}
+        {% set requestedType = app.request.query.get('type')|default("") %}
+        <form id="operations" method="get">
+          <div class="row">
+            <div class="medium-4 columns">
+              <label>
+                <select name="year" onchange="this.form.submit()">
+                  {% set minimumYear = 2010 %}
+                  {% set currentYear = "now"|date("Y") %}
+
+                  {% for year in (currentYear)..minimumYear %}
+                     <option {% if requestedYear == year %}selected{% endif %} value="{{year}}">{{year}}</option>
+                  {% endfor %}
+                </select>
+              </label>
+            </div>
+            <div class="medium-4 columns">
+              <label>
+                <select name="department" onchange="this.form.submit()">
+                  {% setcontent departments = 'departments' where { intern: true, title: 'Feuerwehr%' } orderby 'title' %}
+                  <option value="">Alle Feuerwehren</option>
+                  {% for department in departments %}
+                    <option {% if requestedDepartment == department.id %}selected{% endif %} value="{{department.id}}">{{department.title}}</option>
+                  {% endfor %}
+                </select>
+              </label>
+            </div>
+            <div class="medium-4 columns">
+              <label>
+                <select name="type" onchange="this.form.submit()">
+                  {% setcontent optypes = 'operationtypes' orderby 'title' %}
+                  <option value="">Alle Einsatzarten</option>
+                  {% for optype in optypes %}
+                    <option {% if requestedType == optype.id %}selected{% endif %} value="{{optype.id}}">{{optype.title}}</option>
+                  {% endfor %}
+                </select>
+              </label>
+            </div>
+          </div>
+        </form>
+        {% set lastYear = requestedYear - 1 %}
+        {% set nextYear = requestedYear + 1 %}
+        {% set fdate = '> 31-12-' ~ lastYear ~ ' 23:59:59 && < 01-01-' ~ nextYear %}
+        {% setcontent records = 'operations' where { beginat: fdate } %}
+        {% set operations = [] %}
+
+        {% for record in records %}
+          {% if requestedType == "" or requestedType == record.relation.operationtypes[0] %}
+              {% if requestedDepartment == "" %}
+                {% set operations = operations|merge([record]) %}
+              {% else %}
+                {% set vehicles = record.related('vehicles') %}
+                {% set notFound = true %}
+                {% for vehicle in vehicles if notFound %}
+                  {% if vehicle.relation.departments[0] == requestedDepartment %}
+                    {% set operations = operations|merge([record]) %}
+                    {% set notFound = false %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
+          {% endif %}
+        {% endfor %}
 
         <ul class="no-bullet operations-list">
-        {% for record in records %}
+        {% for record in operations %}
           <li>
             <a href="{{ record.link }}">
                 <article>
+                    <span class="number">#{{loop.revindex}}</span>
                     <span class="title">{{record.title}}</span>
                     <span class="date">{{record.beginat|localedatetime('%A, %d.%m.')}}</span>
                 </article>
@@ -38,13 +83,7 @@
 
         {% else %}
             <article>
-
-                <h2>{{ __('general.phrase.no-content-found') }}</h2>
-
-                <p>
-                    {{ __("Unfortunately, no content could be found. Try another page, or go to the <a href=\"%paths_root%\">homepage</a>.", {'%paths_root%': paths.root} ) }}
-                </p>
-
+                <h2>{{ __('general.phrase.no-operation-found') }}</h2>
             </article>
         {% endfor %}
         </ul>

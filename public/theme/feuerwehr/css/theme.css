@@ -61,3 +61,18 @@ p.meta {
 
 .widgetholder .widget {
   margin: 1.5em 0; }
+
+.operations-list span.date {
+  float: right; }
+
+.operations-list li {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
+  list-style-position: inside;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+  .operations-list li:hover {
+    background-color: #e6e6e6; }

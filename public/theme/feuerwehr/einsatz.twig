@@ -2,7 +2,7 @@
 
 {% block main %}
 
-    <h1>{{ record.title }}</h1>
+    <h2>{{ record.title }}</h2>
 
     {# Output all fields, in the order as defined in the contenttype.
        To change the generated html and configure the options, see:
@@ -20,18 +20,18 @@
       </tr>
       <tr>
         <td>Alarmierung</td>
-        <td>{{record.beginat}}</td>
+        <td>{{record.beginat|localedatetime('%d.%m.%Y %H:%M Uhr')}}</td>
       </tr>
       <tr>
         <td>Einsatzende</td>
-        <td>{{record.endat}}</td>
+        <td>{{record.endat|localedatetime('%d.%m.%Y %H:%M Uhr')}}</td>
       </tr>
       <tr>
         <td>Einsatzleiter</td>
         <td>{{record.incidentcommander}}</td>
       </tr>
       <tr>
-        <td>Feuerwehren der Gemeinde Frielendorf</td>
+        <td>Feuerwehren der</br> Gemeinde Frielendorf</td>
         <td>
           {% set vehicles = record.related('vehicles') %}
           {% set internvehicles = [] %}
@@ -50,7 +50,7 @@
             {% if fub != dp %}
               <h6>{{dp}}</h6><ul>
                 {% for vehicle in internvehicles if vehicle.department.title == dp %}
-                  <li>{{ vehicle.vehicle.title }}</li>
+                  <li>{{ vehicle.vehicle.title }} {% if vehicle.vehicle.shorttitle %}({{vehicle.vehicle.shorttitle}}){% endif %}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
