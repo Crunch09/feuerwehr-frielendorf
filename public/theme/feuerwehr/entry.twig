@@ -1,0 +1,23 @@
+{% extends 'partials/_master.twig' %}
+
+{% block main %}
+
+<article>
+
+    <h2><a href="{{ record.link }}">{{ record.title }}</a></h2>
+
+    {% if content.image!="" %}
+        <div class='imageholder'><img src="{{ record.image|thumbnail(480, 480) }}"></div>
+    {% endif %}
+
+    {{ record.body|markdown }}
+
+    <p class="meta"><a href="{{ record.link }}">Link</a> -
+        Verfasst von {{ record.user.displayname }}
+        am {{ record.datecreated|date("d.M.Y")}}</p>
+
+</article>
+
+    {% include 'partials/_recordfooter.twig' with { 'record': record, 'extended': true } %}
+
+{% endblock main %}

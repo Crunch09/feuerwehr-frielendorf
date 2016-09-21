@@ -122,3 +122,12 @@ p.meta {
     }
   }
 }
+
+// Departments stuff
+.department-additional-info{
+  background-color: $light-gray;
+
+  .department-contact-info{
+    margin-top: $paragraph-margin-bottom;
+  }
+}

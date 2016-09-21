@@ -76,3 +76,8 @@ p.meta {
   text-overflow: ellipsis; }
   .operations-list li:hover {
     background-color: #e6e6e6; }
+
+.department-additional-info {
+  background-color: #e6e6e6; }
+  .department-additional-info .department-contact-info {
+    margin-top: 1rem; }

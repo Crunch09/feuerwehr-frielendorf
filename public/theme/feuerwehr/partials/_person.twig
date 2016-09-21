@@ -1,0 +1,19 @@
+<div class="media-object">
+  <div class="media-object-section">
+    <div class="thumbnail">
+      {% if record.profileimage.file is null %}
+        {% set image_url = paths.theme ~ "images/logo_ea.gif" %}
+        <img src="{{image_url}}">
+      {% else %}
+        {{ record.image|thumbnail(480, 480) }}
+      {% endif %}
+    </div>
+  </div>
+  <div class="media-object-section">
+    <h6>{{task}}</h6>
+    <p>{{record.firstname}} {{record.lastname}}</br>
+      {{record.street}} {{record.houseno}}, {{record.zipcode}} {{record.city}}</br>
+      Tel.: {{record.phone}}</br>
+      Mail.: {{record.email}}</p>
+  </div>
+</div>

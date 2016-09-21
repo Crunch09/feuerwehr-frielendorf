@@ -53,6 +53,38 @@ contentlisting:
 # ------------------------------------------------------------------------------
 # Place your own routes here, that have a LOWER priority than the default routes.
 
+departmentnews:
+    path: /{contenttypeslug}/{slug}/news
+    defaults:
+        _controller: controller.frontend:record
+    requirements:
+        contenttypeslug: einheit
+departmentactive:
+    path: /{contenttypeslug}/{slug}/active
+    defaults:
+        _controller: controller.frontend:record
+    requirements:
+        contenttypeslug: einheit
+departmentyouth:
+    path: /{contenttypeslug}/{slug}/youth
+    defaults:
+        _controller: controller.frontend:record
+    requirements:
+        contenttypeslug: einheit
+departmentchildren:
+    path: /{contenttypeslug}/{slug}/children
+    defaults:
+        _controller: controller.frontend:record
+    requirements:
+        contenttypeslug: einheit
+departmentvehicles:
+    path: /{contenttypeslug}/{slug}/vehicles
+    defaults:
+        _controller: controller.frontend:record
+    requirements:
+        contenttypeslug: einheit
+
+
 
 
 # ------------------------------------------------------------------------------

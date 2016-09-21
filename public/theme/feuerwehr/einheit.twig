@@ -1,0 +1,159 @@
+{% extends 'partials/_master.twig' %}
+
+{% block main %}
+
+{% set chiefs = [] %}
+{% set vice_chiefs = [] %}
+{% set youth_chiefs = [] %}
+{% set youth_vice_chiefs = [] %}
+{% set children_chiefs = [] %}
+{% set children_vice_chiefs = [] %}
+
+{% for ap in record.appointes %}
+  {% if ap.get('task') == 'department_chief' %}
+    {% set chiefs = chiefs|merge([ap]) %}
+  {% elseif ap.get('task') == 'vice_department_chief' %}
+    {% set vice_chiefs = vice_chiefs|merge([ap]) %}
+  {% elseif ap.get('task') == 'youth_chief' %}
+    {% set youth_chiefs = youth_chiefs|merge([ap]) %}
+  {% elseif ap.get('task') == 'youth_vice_chief' %}
+    {% set youth_vice_chiefs = youth_vice_chiefs|merge([ap]) %}
+  {% elseif ap.get('task') == 'children_chief' %}
+    {% set children_chiefs = children_chiefs|merge([ap]) %}
+  {% elseif ap.get('task') == 'vice_children_chief' %}
+    {% set vice_children_chiefs = vice_children_chiefs|merge([ap]) %}
+  {% endif %}
+{% endfor %}
+
+{% set route = app.request.get('_route') %}
+<ul class="vertical medium-horizontal menu accordion-menu" data-accordion-menu data-responsive-menu="accordion medium-dropdown" id="operations-tabs">
+  <li {% if(route == "departmentnews" or route == "contentlink") %}class="active"{% endif %}><a href="{{record.link}}/news">News</a></li>
+  <li {% if(route == "departmentactive") %}class="active"{% endif %}><a href="{{record.link}}/active">Einsatzabteilung</a></li>
+  <li {% if(route == "departmentyouth") %}class="active"{% endif %}><a href="{{record.link}}/youth">Jugendfeuerwehr</a></li>
+  <li {% if(route == "departmentchildren") %}class="active"{% endif %}><a href="{{record.link}}/children">Kinderfeuerwehr</a></li>
+  <li {% if(route == "departmentvehicles") %}class="active"{% endif %}><a href="{{record.link}}/vehicles">Fahrzeuge</a></li>
+</ul>
+
+{% if route == "departmentnews" or route == "contentlink" %}
+  <div class="row">
+    <div class="large-12 columns">
+      {% set ids = record.relation.entries|join(" || ") %}
+      {% setcontent entries = "entries" where { id: ids } allowpaging limit 5 %}
+      {% for entry in entries %}
+        <article>
+          <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
+
+          {{ entry.excerpt }}
+
+          <p class="meta"><a href="{{ entry.link }}">Mehr...</a> -
+          Verfasst von {{ entry.user.displayname }}
+          am {{ entry.datecreated|date("d.M.Y")}}</p>
+
+        </article>
+      {% else %}
+        <h2>Leider sind noch keine News vorhanden.</h2>
+      {% endfor %}
+      {{ pager() }}
+    </div>
+  </div>
+{% elseif route == "departmentactive" %}
+  <div class="row">
+    <div class="large-12 columns">
+      {{record.activedescription}}
+      {% for ap in chiefs %}
+        {{ include('partials/_person.twig', { 'record': ap, 'task': 'Wehrführer/in' }) }}
+      {% endfor %}
+
+      {% for ap in vice_chiefs %}
+        {{ include('partials/_person.twig', { 'record': ap, 'task': 'Stellv. Wehrführer/in' }) }}
+      {% endfor %}
+      {% if record.schedule %}
+        Aktueller Dienstplan: <a href="/files/{{record.schedule}}">Download</a>
+      {% endif %}
+    </div>
+  </div>
+{% elseif route == "departmentyouth" %}
+    <div class="row">
+      <div class="large-12 columns">
+        {{record.youthdescription}}
+        {% for ap in youth_chiefs %}
+          {{ include('partials/_person.twig', { 'record': ap, 'task': 'Jugendfeuerwehrwart/in' }) }}
+        {% endfor %}
+
+        {% for ap in youth_vice_chiefs %}
+          {{ include('partials/_person.twig', { 'record': ap, 'task': 'Betreuer/in' }) }}
+        {% endfor %}
+      </div>
+    </div>
+{% elseif route == "departmentchildren" %}
+    <div class="row">
+      <div class="large-12 columns">
+        {{record.childrendescription}}
+        {% for ap in children_chiefs %}
+          {{ include('partials/_person.twig', { 'record': ap, 'task': 'Kinderfeuerwehrwart/in' }) }}
+        {% endfor %}
+
+        {% for ap in children_vice_chiefs %}
+          {{ include('partials/_person.twig', { 'record': ap, 'task': 'Betreuer/in' }) }}
+        {% endfor %}
+      </div>
+    </div>
+{% elseif route == "departmentvehicles" %}
+    <div class="row">
+      <div class="large-12 columns">
+        {% for vehicle in record.related('vehicles') %}
+          {{ include('partials/_vehicle_small.twig', { 'record': vehicle }) }}
+        {% endfor %}
+      </div>
+    </div>
+{% else %}
+
+{% endif %}
+
+
+
+{% endblock main %}
+{% block sub_main %}
+
+<div class="row department-additional-info">
+  <div class="large-6 columns">
+    <div id="map" style="width: 100%; height: 300px;"></div>
+  </div>
+  <div class="large-6 text-center columns">
+    {% if record.facebook %}
+      <div class="fb-page" data-href="{{record.facebook}}" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="{{record.facebook}}" class="fb-xfbml-parse-ignore"><a href="{{record.facebook}}">{{record.title}}</a></blockquote></div>
+    {% endif %}
+    <div class="department-contact-info">
+      <div class="small-12 columns"
+        <span>{{record.coordinates.formatted_address|replace({', Germany': ""})}}</span>
+      </div>
+      <div class="small-12 columns">
+        <span>{{record.title|replace({'Feuerwehr ': ''})|lower}}@feuerwehr.frielendorf.de</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock sub_main %}
+{% block bottomincludes %}
+
+  {% if record.coordinates.latitude and record.coordinates.longitude %}
+    <script>
+      var map;
+      var marker;
+      var myLatLng = {lat: {{ record.coordinates.latitude }}, lng: {{ record.coordinates.longitude }}};
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          zoom: 14
+        });
+
+        marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{app.config.get('general/google_api_key')}}&callback=initMap"
+    async defer></script>
+  {% endif %}
+{% endblock bottomincludes %}

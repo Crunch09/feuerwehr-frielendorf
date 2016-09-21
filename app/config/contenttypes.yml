@@ -60,21 +60,20 @@ entries:
             type: slug
             uses: title
         teaser:
-            type: html
+            type: markdown
             height: 150px
         body:
-            type: html
+            type: markdown
             height: 300px
-        image:
-            type: image
-            group: media
+        imagelist:
+            type: imagelist
         video:
             type: video
     relations:
-        pages:
-          multiple: false
+        departments:
+          multiple: true
           order: title
-          label: Select a page
+          label: Feuerwehren wählen
     taxonomy: [ categories, tags ]
     record_template: entry.twig
     listing_template: listing.twig
@@ -306,6 +305,18 @@ departments:
             type: file
             accept_file_types: [ pdf ]
             group: Erweitert
+        activedescription:
+            label: Beschreibung der Einsatzabteilung
+            type: markdown
+            group: Erweitert
+        youthdescription:
+            label: Beschreibung der Jugendfeuerwehr
+            type: markdown
+            group: Erweitert
+        childrendescription:
+            label: Beschreibung der Kinderfeuerwehr
+            type: markdown
+            group: Erweitert
         appointes:
             label: Amtsträger
             type: repeater
@@ -367,6 +378,7 @@ departments:
     viewless: false
     default_status: published
     searchable: true
+    sort: title
     show_in_menu: Feuerwehr
 
 operations:

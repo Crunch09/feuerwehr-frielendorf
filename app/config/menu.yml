@@ -7,3 +7,8 @@ main:
       class: first
     - label: Einsätze
       path: operations
+    - label: Unsere Wehren
+      path: departments
+      list:
+          contenttype: departments
+      class: last

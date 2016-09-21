@@ -60,7 +60,7 @@
       </tr>
       <tr>
         <td colspan="2">
-          <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ record.coordinates.latitude }},{{ record.coordinates.longitude }}&zoom=14&size=617x300&sensor=false&markers={{ record.coordinates.latitude }},{{ record.coordinates.longitude }}">
+          <div id="map" style="width: 100%; height: 300px;"></div>
         </td>
       </tr>
       <tr>
@@ -89,3 +89,27 @@
     {% include 'partials/_recordfooter.twig' with { 'record': record, 'extended': true } %}
 
 {% endblock main %}
+
+{% block bottomincludes %}
+
+  {% if record.coordinates.latitude and record.coordinates.longitude %}
+    <script>
+      var map;
+      var marker;
+      var myLatLng = {lat: {{ record.coordinates.latitude }}, lng: {{ record.coordinates.longitude }}};
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          zoom: 14
+        });
+
+        marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{app.config.get('general/google_api_key')}}&callback=initMap"
+    async defer></script>
+  {% endif %}
+{% endblock bottomincludes %}

@@ -25,6 +25,18 @@
             {{- item.label|default('-') -}}
         </a>
 
+        {% set list = [] %}
+        {% if item.list|default(false) and withsubmenus %}
+          {% setcontent listedcontent = item.list.contenttype where { intern: true,  title: 'Feuerwehr%'} %}
+          {% for listitem in listedcontent %}
+            {% set list = list|merge([{title: listitem.gettitle(), link: listitem.link, label: listitem.gettitle()|replace({'Feuerwehr ': ""})}]) %}
+          {% endfor %}
+          <ul class="menu submenu vertical" data-submenu>
+            {% for submenu in list %}
+              {{ display_menu_item(submenu, loop) }}
+            {% endfor %}
+          </ul>
+        {% endif %}
         {% if item.submenu is defined and withsubmenus %}
             <ul class="menu submenu vertical" data-submenu>
                 {% for submenu in item.submenu %}
@@ -47,4 +59,3 @@
     {% endif %}
 {% endfor %}
 </ul>
-
