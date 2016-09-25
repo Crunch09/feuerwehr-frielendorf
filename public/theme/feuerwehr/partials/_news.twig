@@ -1,0 +1,17 @@
+{% for entry in entries %}
+  <div class="large-6 columns">
+    <article>
+      <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
+
+      {{ entry.excerpt }}
+
+      <p class="meta"><a href="{{ entry.link }}">Mehr...</a> -
+      Verfasst von {{ entry.user.displayname }}
+      am {{ entry.datecreated|date("d.M.Y")}}</p>
+
+    </article>
+  </div>
+{% else %}
+  <h2>Leider sind noch keine News vorhanden.</h2>
+{% endfor %}
+{{ pager() }}

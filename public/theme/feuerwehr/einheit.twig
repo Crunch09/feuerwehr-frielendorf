@@ -39,21 +39,8 @@
     <div class="large-12 columns">
       {% set ids = record.relation.entries|join(" || ") %}
       {% setcontent entries = "entries" where { id: ids } allowpaging limit 5 %}
-      {% for entry in entries %}
-        <article>
-          <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
 
-          {{ entry.excerpt }}
-
-          <p class="meta"><a href="{{ entry.link }}">Mehr...</a> -
-          Verfasst von {{ entry.user.displayname }}
-          am {{ entry.datecreated|date("d.M.Y")}}</p>
-
-        </article>
-      {% else %}
-        <h2>Leider sind noch keine News vorhanden.</h2>
-      {% endfor %}
-      {{ pager() }}
+      {{ include('partials/_news.twig', { 'entries': entries })}}
     </div>
   </div>
 {% elseif route == "departmentactive" %}

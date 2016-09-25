@@ -2,14 +2,7 @@
 
 {% block main %}
 
-    <h1>{{ record.title }}</h1>
-
-    {{ record.teaser }}
-
-    {{ popup(record.image, 1200, 500) }}
-
-    {{ record.body }}
-
-    {{ include('partials/_recordfooter.twig', { 'record': record }) }}
+{% setcontent entries = "entries" where { categories: "Startseite" } allowpaging limit 5 %}
+{{ include('partials/_news.twig', { 'entries': entries })}}
 
 {% endblock main %}
