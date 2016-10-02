@@ -1,0 +1,37 @@
+{% set vehicles = record.related('vehicles') %}
+{% set operation_vehicles = [] %}
+{% set departments = [] %}
+{% if intern %}
+  {% set title = "Feuerwehren der</br> Gemeinde Frielendorf" %}
+{% else %}
+  {% set title = "Sonstige Einsatzkräfte" %}
+{% endif %}
+
+{% for vehicle in vehicles %}
+  {% set department = vehicle.related('departments') %}
+  {% if (intern and department[0].intern) or (not department[0].intern and not intern) %}
+    {% if department[0].title not in departments %}
+      {% set departments = departments|merge([department[0].title]) %}
+    {% endif %}
+    {% set operation_vehicles = operation_vehicles|merge([{department: department[0], vehicle: vehicle}]) %}
+  {% endif %}
+{% endfor %}
+
+{% if departments|length > 0 %}
+  <tr>
+    <td>{{title|raw}}</td>
+    <td>
+      {% set last_department = "" %}
+      {% for department in departments|sort %}
+        {% if last_department != department %}
+          <h6>{{department}}</h6><ul>
+            {% for vehicle in operation_vehicles if vehicle.department.title == department %}
+              <li>{{ vehicle.vehicle.title }} {% if vehicle.vehicle.shorttitle is not empty %}({{vehicle.vehicle.shorttitle}}){% endif %}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% set last_department = department %}
+      {% endfor %}
+    </td>
+  </tr>
+{% endif %}

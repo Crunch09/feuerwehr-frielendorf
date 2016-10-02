@@ -30,34 +30,8 @@
         <td>Einsatzleiter</td>
         <td>{{record.incidentcommander}}</td>
       </tr>
-      <tr>
-        <td>Feuerwehren der</br> Gemeinde Frielendorf</td>
-        <td>
-          {% set vehicles = record.related('vehicles') %}
-          {% set internvehicles = [] %}
-          {% set externvehicles = [] %}
-          {% set departments = [] %}
-
-          {% for vehicle in vehicles %}
-            {% set department = vehicle.related('departments') %}
-            {% if department[0].title not in departments %}
-              {% set departments = departments|merge([department[0].title]) %}
-            {% endif %}
-            {% set internvehicles = internvehicles|merge([{department: department[0], vehicle: vehicle}]) %}
-          {% endfor %}
-          {% set fub = "" %}
-          {% for dp in departments|sort %}
-            {% if fub != dp %}
-              <h6>{{dp}}</h6><ul>
-                {% for vehicle in internvehicles if vehicle.department.title == dp %}
-                  <li>{{ vehicle.vehicle.title }} {% if vehicle.vehicle.shorttitle %}({{vehicle.vehicle.shorttitle}}){% endif %}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-            {% set fub = dp %}
-          {% endfor %}
-        </td>
-      </tr>
+      {% include 'partials/_operation_vehicles.twig' with { 'intern': true, 'record': record } %}
+      {% include 'partials/_operation_vehicles.twig' with { 'intern': false, 'record': record } %}        
       <tr>
         <td colspan="2">
           <div id="map" style="width: 100%; height: 300px;"></div>
@@ -70,7 +44,7 @@
       </tr>
      </tbody>
    </table>
-   <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+   <div class="orbit" role="region" aria-label="Einsatzbilder" data-orbit>
       <ul class="orbit-container">
         <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
         <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
