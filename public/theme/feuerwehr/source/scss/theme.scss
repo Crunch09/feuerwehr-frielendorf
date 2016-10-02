@@ -102,6 +102,24 @@ p.meta {
     }
 }
 
+body {
+  background-image: url("../images/40c7e5e5.png");
+  @extend body;
+}
+
+.headertitle {
+  background-color: $white;
+  @extend .headertitle;
+}
+
+footer {
+  background-color: $white;
+}
+
+.main-row {
+  background-color: $white;
+}
+
 // Operations stuff
 .operations-list{
   span.date{

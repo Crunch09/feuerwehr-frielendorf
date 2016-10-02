@@ -13,6 +13,7 @@
                 {{ app.config.get('general/sitename') -}}
             {% if record.title is not defined and app.config.get('general/payoff') %} | {{ app.config.get('general/payoff') }}{% endif -%}
         </title>
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="stylesheet" href="{{ paths.theme }}css/foundation.css">
         <link rel="stylesheet" href="{{ paths.theme }}css/theme.css">
         <link href='https://fonts.googleapis.com/css?family=Noto+Sans:700,700italic' rel='stylesheet' type='text/css'>
@@ -42,7 +43,7 @@
                 </div>
             {% endif %}
 
-            <div class="row">
+            <div class="row main-row">
 
                 {% if theme.layout.aside == "left" %}
                     {{ include('partials/_aside.twig') }}

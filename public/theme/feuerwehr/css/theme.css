@@ -62,6 +62,18 @@ p.meta {
 .widgetholder .widget {
   margin: 1.5em 0; }
 
+body {
+  background-image: url("../images/40c7e5e5.png"); }
+
+.headertitle {
+  background-color: #fefefe; }
+
+footer {
+  background-color: #fefefe; }
+
+.main-row {
+  background-color: #fefefe; }
+
 .operations-list span.date {
   float: right; }
 

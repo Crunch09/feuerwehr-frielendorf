@@ -143,7 +143,8 @@ $code-background: $light-gray;
 $code-border: 1px solid $medium-gray;
 $code-padding: rem-calc(2 5 1);
 $anchor-color: $primary-color;
-$anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
+// $anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
+$anchor-color-hover: #c70c0c;
 $anchor-text-decoration: underline;
 $anchor-text-decoration-hover: underline;
 $hr-width: $global-width;
@@ -558,4 +559,3 @@ $topbar-padding: 0.5rem 0;
 $topbar-background: #fefefe;
 $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
-
