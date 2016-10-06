@@ -6,11 +6,10 @@
 
     <h2><a href="{{ record.link }}">{{ record.title }}</a></h2>
 
-    {% if content.image!="" %}
-        <div class='imageholder'><img src="{{ record.image|thumbnail(480, 480) }}"></div>
-    {% endif %}
 
     {{ record.body|markdown }}
+
+    {% include 'partials/_imagelist_popup.twig' with { 'record': record } %}
 
     <p class="meta"><a href="{{ record.link }}">Link</a> -
         Verfasst von {{ record.user.displayname }}

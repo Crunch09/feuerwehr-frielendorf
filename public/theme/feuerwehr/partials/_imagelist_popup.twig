@@ -1,0 +1,7 @@
+<div class="row">
+  {% for image in record.imagelist %}
+    <div class="large-3 small-6 columns">
+      {{popup(image.filename)}}
+    </div>
+  {% endfor %}
+</div>

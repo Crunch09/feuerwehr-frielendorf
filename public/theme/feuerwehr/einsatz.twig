@@ -31,7 +31,7 @@
         <td>{{record.incidentcommander}}</td>
       </tr>
       {% include 'partials/_operation_vehicles.twig' with { 'intern': true, 'record': record } %}
-      {% include 'partials/_operation_vehicles.twig' with { 'intern': false, 'record': record } %}        
+      {% include 'partials/_operation_vehicles.twig' with { 'intern': false, 'record': record } %}
       <tr>
         <td colspan="2">
           <div id="map" style="width: 100%; height: 300px;"></div>
@@ -44,18 +44,7 @@
       </tr>
      </tbody>
    </table>
-   <div class="orbit" role="region" aria-label="Einsatzbilder" data-orbit>
-      <ul class="orbit-container">
-        <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-        <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
-         {% for image in record.imagelist %}
-          <li class="orbit-slide">
-            <img class="orbit-image" src="{{ thumbnail(image.filename) }}" alt="{{image.title}}">
-            <figcaption class="orbit-caption">{{image.title}}</figcaption>
-          </li>
-         {% endfor %}
-      </ul>
-    </div>
+   {% include 'partials/_imagelist_popup.twig' with { 'record': record } %}
 
 
 
