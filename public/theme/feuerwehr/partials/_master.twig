@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{ paths.theme }}css/foundation.css">
         <link rel="stylesheet" href="{{ paths.theme }}css/theme.css">
         <link href='https://fonts.googleapis.com/css?family=Noto+Sans:700,700italic' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
         {% block headincludes %}
         {% endblock headincludes %}
     </head>
@@ -49,7 +50,7 @@
                     {{ include('partials/_aside.twig') }}
                 {% endif %}
 
-                <div class="{% if theme.layout.aside not in ['left', 'right'] %}large-centered{% endif %} large-{{ main_width }} columns">
+                <div class="{% if theme.layout.aside not in ['left', 'right'] %}large-centered{% endif %} large-{{ main_width }} columns main-section">
 
                     {{ widgets('main_top') }}
 
