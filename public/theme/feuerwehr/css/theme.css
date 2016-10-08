@@ -39,7 +39,9 @@ p.meta {
   img {
     margin: 0 auto 1rem;
     max-width: 80%;
-    display: block; } }
+    display: block; }
+  .news-excerpts img {
+    margin: .5rem; } }
 
 @media screen and (max-width: 39.9375em) {
   .no-js .top-bar {

@@ -1,13 +1,21 @@
 {% for entry in entries %}
   <div class="large-6 columns">
-    <article>
-      <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
+    <article class="news-excerpts">
+        <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
 
-      {{ entry.excerpt }}
+        {% if entry.imagelist[0] %}
+          {% if loop.index0 is divisibleby(2) %}
+            {% set float = "left" %}
+          {% else %}
+            {% set float = "right" %}
+          {% endif %}
+          <img style="float: {{float}};" src="{{thumbnail(entry.imagelist[0].filename)}}">
+        {% endif %}
+        {{ entry.excerpt }}
 
-      <p class="meta"><a href="{{ entry.link }}">Mehr...</a> -
-      Verfasst von {{ entry.user.displayname }}
-      am {{ entry.datecreated|date("d.M.Y")}}</p>
+        <p class="meta"><a href="{{ entry.link }}">Mehr...</a> -
+        Verfasst von {{ entry.user.displayname }}
+        am {{ entry.datecreated|date("d.M.Y")}}</p>
 
     </article>
   </div>
