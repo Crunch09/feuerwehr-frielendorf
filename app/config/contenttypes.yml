@@ -22,13 +22,8 @@ pages:
         slug:
             type: slug
             uses: title
-        image:
-            type: image
-        teaser:
-            type: html
-            height: 150px
         body:
-            type: html
+            type: markdown
             height: 300px
         template:
             type: templateselect
