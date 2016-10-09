@@ -9,6 +9,10 @@
     {% set withsubmenus = true %}
 {% endif %}
 
+{% if position is not defined %}
+  {% set position = 0 %}
+{% endif %}
+
 {# The 'recursive' macro, for inserting one menu item. If it has a submenu, it
    invokes itself to insert the items of the submenus. #}
 {% macro display_menu_item(item, loop, extraclass, withsubmenus) %}
@@ -53,7 +57,7 @@
 
 {# The main menu loop: Iterates over the items, calling `display_menu_item` #}
 <ul  class="menu vertical medium-horizontal {{ class|default('') }}" data-responsive-menu="accordion medium-dropdown">
-{% for item in menu %}
+{% for item in menu if (item.display_on_positions is not defined or position in item.display_on_positions) %}
     {% if item.label is defined %}
         {{ display_menu_item(item, loop, '', withsubmenus) }}
     {% endif %}

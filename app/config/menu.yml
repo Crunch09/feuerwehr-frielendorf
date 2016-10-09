@@ -12,3 +12,7 @@ main:
       list:
           contenttype: departments
       class: last
+    - label: Impressum
+      path: page/Impressum
+      display_on_positions:
+        - 1
