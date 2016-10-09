@@ -31,7 +31,7 @@
 
         {% set list = [] %}
         {% if item.list|default(false) and withsubmenus %}
-          {% setcontent listedcontent = item.list.contenttype where { intern: true,  title: 'Feuerwehr%'} %}
+          {% setcontent listedcontent = item.list.contenttype where { showinmenu: true} %}
           {% for listitem in listedcontent %}
             {% set list = list|merge([{title: listitem.gettitle(), link: listitem.link, label: listitem.gettitle()|replace({'Feuerwehr ': ""})}]) %}
           {% endfor %}

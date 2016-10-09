@@ -2,7 +2,7 @@
 
 {% block main %}
 
-        {% setcontent records = 'departments' where { intern: true, title: 'Feuerwehr%' } orderby 'title' %}
+        {% setcontent records = 'departments' where { showinmenu: true } orderby 'title' %}
         {% for record in records %}
             <article>
 

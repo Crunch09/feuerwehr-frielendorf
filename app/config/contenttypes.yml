@@ -312,6 +312,18 @@ departments:
             label: Beschreibung der Kinderfeuerwehr
             type: markdown
             group: Erweitert
+        showinmenu:
+            label: Im Menü anzeigen
+            type: checkbox
+            group: Anzeige
+        showyouth:
+            label: Jugendfeuerwehr anzeigen
+            type: checkbox
+            group: Anzeige
+        showchildren:
+            label: Kinderfeuerwehr anzeigen
+            type: checkbox
+            group: Anzeige
         appointes:
             label: Amtsträger
             type: repeater

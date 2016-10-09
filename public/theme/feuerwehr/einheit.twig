@@ -30,8 +30,17 @@
 <ul class="vertical medium-horizontal menu accordion-menu" data-accordion-menu data-responsive-menu="accordion medium-dropdown" id="operations-tabs">
   <li {% if(route == "departmentnews" or route == "contentlink") %}class="active"{% endif %}><a href="{{record.link}}/news">News</a></li>
   <li {% if(route == "departmentactive") %}class="active"{% endif %}><a href="{{record.link}}/active">Einsatzabteilung</a></li>
-  <li {% if(route == "departmentyouth") %}class="active"{% endif %}><a href="{{record.link}}/youth">Jugendfeuerwehr</a></li>
-  <li {% if(route == "departmentchildren") %}class="active"{% endif %}><a href="{{record.link}}/children">Kinderfeuerwehr</a></li>
+  {% if record.showyouth %}
+    {% set lcl = "departments." ~ record.title|replace({'Feuerwehr ': ""})|lower ~ ".youth.title" %}
+    {% set translated_string = __(lcl) %}
+    {% if translated_string == lcl %}
+        {% set translated_string = "Jugendfeuerwehr" %}
+    {% endif %}
+    <li {% if(route == "departmentyouth") %}class="active"{% endif %}><a href="{{record.link}}/youth">{{ translated_string }}</a></li>
+  {% endif %}
+  {% if record.showchildren %}
+    <li {% if(route == "departmentchildren") %}class="active"{% endif %}><a href="{{record.link}}/children">Kinderfeuerwehr</a></li>
+  {% endif %}
   <li {% if(route == "departmentvehicles") %}class="active"{% endif %}><a href="{{record.link}}/vehicles">Fahrzeuge</a></li>
 </ul>
 
@@ -60,7 +69,7 @@
       {% endif %}
     </div>
   </div>
-{% elseif route == "departmentyouth" %}
+{% elseif route == "departmentyouth" and record.showyouth %}
     <div class="row">
       <div class="large-12 columns">
         {{record.youthdescription}}
@@ -73,7 +82,7 @@
         {% endfor %}
       </div>
     </div>
-{% elseif route == "departmentchildren" %}
+{% elseif route == "departmentchildren" and record.showchildren %}
     <div class="row">
       <div class="large-12 columns">
         {{record.childrendescription}}
@@ -112,11 +121,14 @@
       <div class="fb-page" data-href="{{record.facebook}}" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="{{record.facebook}}" class="fb-xfbml-parse-ignore"><a href="{{record.facebook}}">{{record.title}}</a></blockquote></div>
     {% endif %}
     <div class="department-contact-info">
-      <div class="small-12 columns"
-        <span>{{record.coordinates.formatted_address|replace({', Germany': ""})}}</span>
-      </div>
-      <div class="small-12 columns">
-        <span>{{record.title|replace({'Feuerwehr ': ''})|lower}}@feuerwehr.frielendorf.de</span>
+      <div class="row">
+        <div class="small-12 columns"
+          <span>{{record.coordinates.formatted_address|replace({', Germany': ""})}}</span>
+        </div>
+        <div class="small-12 columns">
+          {% set mail_address = record.title|replace({'Feuerwehr ': ''})|lower %}
+          <span><script>document.write("<a"+ " href='mailto:" +"{{mail_address}}@" + "feuerwehr-frielendorf.de" +"'>" + "{{mail_address}}@" + "feuerwehr-frielendorf" + "</a>")</script></span>
+        </div>
       </div>
     </div>
   </div>
