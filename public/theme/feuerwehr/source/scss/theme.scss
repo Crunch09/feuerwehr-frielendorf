@@ -123,6 +123,11 @@ footer {
   background-color: $white;
 }
 
+.top-bar {
+  border-radius: $border-radius;
+  box-shadow: 0.5rem .5rem 2.2rem black;
+}
+
 // Operations stuff
 .operations-list{
   span.date{
