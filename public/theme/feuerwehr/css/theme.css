@@ -112,3 +112,12 @@ footer {
 .main-section h5,
 .main-section h6 {
   font-family: 'Comfortaa', cursive; }
+
+.callout-header {
+  background-image: url("../images/BlockHeaderIcon.png");
+  background-repeat: no-repeat;
+  text-align: center;
+  border-radius: 0.3rem;
+  background-color: #c70c0c; }
+  .callout-header h5 {
+    line-height: 2.2rem; }

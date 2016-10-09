@@ -28,7 +28,9 @@
 
         {% setcontent records = "operations" orderby '-beginat' limit 5 %}
         <div class="callout">
-          <h5>Letzte Einsätze</h5>
+          <div class="callout-header">
+            <h5>Letzte Einsätze</h5>
+          </div>
           <ul>
             {% for record in records %}
               <li><a href="{{ record.link }}">{{ record.title }}</a></li>

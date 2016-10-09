@@ -175,3 +175,16 @@ footer {
     font-family: 'Comfortaa', cursive;
   }
 }
+
+// Callouts
+.callout-header {
+  background-image: url("../images/BlockHeaderIcon.png");
+  background-repeat: no-repeat;
+  text-align: center;
+  border-radius: $border-radius;
+  background-color: $anchor-color-hover;
+
+  h5 {
+    line-height: 2.2rem;
+  }
+}
