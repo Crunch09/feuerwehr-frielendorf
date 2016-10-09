@@ -22,7 +22,7 @@
   {% elseif ap.get('task') == 'children_chief' %}
     {% set children_chiefs = children_chiefs|merge([ap]) %}
   {% elseif ap.get('task') == 'vice_children_chief' %}
-    {% set vice_children_chiefs = vice_children_chiefs|merge([ap]) %}
+    {% set children_vice_chiefs = children_vice_chiefs|merge([ap]) %}
   {% endif %}
 {% endfor %}
 
