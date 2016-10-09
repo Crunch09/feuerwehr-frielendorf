@@ -80,6 +80,11 @@ footer {
   border-radius: 0.3rem;
   box-shadow: 0.5rem .5rem 2.2rem black; }
 
+.orbit-container {
+  height: auto !important; }
+  .orbit-container li.orbit-slide {
+    max-height: 100% !important; }
+
 .operations-list span.date {
   float: right; }
 
