@@ -255,6 +255,14 @@ vehicles:
             label: Kurztitel
             type: text
             class: narrow
+        manufacturer:
+            label: Hersteller/Typ
+            type: text
+            class: narrow
+        personnel:
+            label: Besatzung
+            type: text
+            class: narrow
         description:
             label: Beschreibung
             type: markdown

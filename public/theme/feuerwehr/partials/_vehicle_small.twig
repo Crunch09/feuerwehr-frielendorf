@@ -2,15 +2,16 @@
   <div class="media-object-section">
     <div class="thumbnail">
       {% if vehicle.imagelist is empty %}
-        {% set image_url = paths.theme ~ "images/logo_ea.gif" %}
-        <img src="{{image_url}}">
+        <img src="https://dummyimage.com/250/000/fff.jpg&text=Bild+folgt">
       {% else %}
-        {{ vechiles.imagelist[0]|thumbnail(480, 480) }}
+        <img src="{{ vehicle.imagelist[0]|thumbnail(480, 480) }}">
       {% endif %}
     </div>
   </div>
   <div class="media-object-section">
     <h6>{{vehicle.title}} ({{vehicle.shorttitle}})</h6>
-    <span>Funkrufname: {{vehicle.radiocode}}</span>
+    <span><b>Funkrufname:</b> {{vehicle.radiocode}}</span></br>
+    <span><b>Typ:</b> {{vehicle.manufacturer}}</span></br>
+    <span><b>Besatzung:</b> {{vehicle.personnel}}</span></br>
   </div>
 </div>
