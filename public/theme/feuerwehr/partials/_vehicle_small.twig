@@ -1,17 +1,21 @@
-<div class="media-object">
-  <div class="media-object-section">
-    <div class="thumbnail">
-      {% if vehicle.imagelist is empty %}
-        <img src="https://dummyimage.com/250/000/fff.jpg&text=Bild+folgt">
-      {% else %}
-        <img src="{{ vehicle.imagelist[0]|thumbnail(250, 250) }}">
-      {% endif %}
+<div class="media-object row">
+  <div class="small-12 medium-6 columns">
+    <div class="media-object-section">
+      <div class="thumbnail">
+        {% if vehicle.imagelist is empty %}
+          <img src="https://dummyimage.com/250/000/fff.jpg&text=Bild+folgt">
+        {% else %}
+          <img src="{{ vehicle.imagelist[0]|thumbnail(250, 250) }}">
+        {% endif %}
+      </div>
     </div>
   </div>
-  <div class="media-object-section">
-    <h6>{{vehicle.title}} ({{vehicle.shorttitle}})</h6>
-    <span><b>Funkrufname:</b> {{vehicle.radiocode}}</span></br>
-    <span><b>Typ:</b> {{vehicle.manufacturer}}</span></br>
-    <span><b>Besatzung:</b> {{vehicle.personnel}}</span></br>
+  <div class="small-12 medium-6 columns">
+    <div class="media-object-section">
+      <h6>{{vehicle.title}} ({{vehicle.shorttitle}})</h6>
+      <span><b>Funkrufname:</b> {{vehicle.radiocode}}</span></br>
+      <span><b>Typ:</b> {{vehicle.manufacturer}}</span></br>
+      <span><b>Besatzung:</b> {{vehicle.personnel}}</span></br>
+    </div>
   </div>
 </div>
