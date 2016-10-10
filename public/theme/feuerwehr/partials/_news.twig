@@ -1,7 +1,7 @@
 {% for entry in entries %}
   <div class="large-6 columns">
     <article class="news-excerpts">
-        <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
+        <h3><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
 
         {% if entry.imagelist[0] %}
           {% if loop.index0 is divisibleby(2) %}
