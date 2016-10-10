@@ -100,6 +100,10 @@ footer {
   .operations-list li:hover {
     background-color: #e6e6e6; }
 
+.operations-block span {
+  clear: both;
+  display: block; }
+
 .department-additional-info {
   background-color: #e6e6e6; }
   .department-additional-info .department-contact-info {

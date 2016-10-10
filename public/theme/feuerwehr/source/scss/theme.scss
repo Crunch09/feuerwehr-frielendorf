@@ -156,6 +156,13 @@ footer {
   }
 }
 
+.operations-block {
+  span {
+    clear: both;
+    display: block;
+  }
+}
+
 // Departments stuff
 .department-additional-info{
   background-color: $light-gray;

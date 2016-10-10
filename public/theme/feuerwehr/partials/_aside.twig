@@ -31,9 +31,12 @@
           <div class="callout-header">
             <h5>Letzte Einsätze</h5>
           </div>
-          <ul>
+          <ul class="no-bullet operations-block">
             {% for record in records %}
-              <li><a href="{{ record.link }}">{{ record.title }}</a></li>
+              <li>
+                <span><b><a href="{{ record.link }}">{{ record.title }}</a></b></span>
+                </span>{{ record.beginat|localedatetime('%d.%m.%Y %H:%M Uhr') }}</span>
+              </li>
             {% else %}
               <li>{{ __('contenttypes.generic.no-recent', {'%contenttype%': ct.slug}) }}</li>
             {% endfor %}
