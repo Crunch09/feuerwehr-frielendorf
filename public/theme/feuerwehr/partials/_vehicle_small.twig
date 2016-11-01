@@ -13,9 +13,18 @@
   <div class="small-12 medium-6 columns">
     <div class="media-object-section">
       <h6>{{vehicle.title}} ({{vehicle.shorttitle}})</h6>
-      <span><b>Funkrufname:</b> {{vehicle.radiocode}}</span></br>
-      <span><b>Typ:</b> {{vehicle.manufacturer}}</span></br>
-      <span><b>Besatzung:</b> {{vehicle.personnel}}</span></br>
+      {% if vehicle.radiocode is not empty %}
+        <span><b>Funkrufname:</b> {{vehicle.radiocode}}</span></br>
+      {% endif %}
+      {% if vehicle.manufacturer is not empty %}
+        <span><b>Typ:</b> {{vehicle.manufacturer}}</span></br>
+      {% endif %}
+      {% if vehicle.personnel is not empty %}
+        <span><b>Besatzung:</b> {{vehicle.personnel}}</span></br>
+      {% endif %}
+      {% if vehicle.description is not empty %}
+        {{vehicle.description|markdown}}
+      {% endif %}
     </div>
   </div>
 </div>
