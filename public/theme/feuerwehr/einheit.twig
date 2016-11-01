@@ -101,7 +101,9 @@
 {% elseif route == "departmentvehicles" %}
     <div class="row">
       <div class="large-12 columns">
-        {% for vehicle in record.related('vehicles') %}
+        {% set vehicle_ids = record.relation.vehicles|join(" || ") %}
+        {% setcontent related_vehicles = "vehicles" where { id: vehicle_ids } orderby 'position' %}
+        {% for vehicle in related_vehicles %}
           {{ include('partials/_vehicle_small.twig', { 'record': vehicle }) }}
         {% endfor %}
       </div>
