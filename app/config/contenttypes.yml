@@ -266,6 +266,10 @@ vehicles:
         description:
             label: Beschreibung
             type: markdown
+        position:
+            label: Position
+            type: integer
+            min: 0
         imagelist:
             label: Bilder
             type: imagelist
