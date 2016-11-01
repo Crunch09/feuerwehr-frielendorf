@@ -1,5 +1,6 @@
-{% set main_width = theme.layout.main_width|default(8) %}
+{% set main_width = main_width|default(theme.layout.main_width)|default(8) %}
 {% set aside_width = theme.layout.aside_width|default(4) %}
+{% set layout_aside = layout_aside|default(theme.layout.aside) %}
 <!doctype html>
 <html class="no-js" lang="{{ htmllang() }}">
     <head>
@@ -46,11 +47,11 @@
 
             <div class="row main-row">
 
-                {% if theme.layout.aside == "left" %}
+                {% if layout_aside == "left" %}
                     {{ include('partials/_aside.twig') }}
                 {% endif %}
 
-                <div class="{% if theme.layout.aside not in ['left', 'right'] %}large-centered{% endif %} large-{{ main_width }} columns main-section">
+                <div class="{% if layout_aside not in ['left', 'right'] %}large-centered{% endif %} large-{{ main_width }} columns main-section">
 
                     {{ widgets('main_top') }}
 
@@ -61,7 +62,7 @@
 
                 </div>
 
-                {% if theme.layout.aside == "right" %}
+                {% if layout_aside == "right" %}
                     {{ include('partials/_aside.twig') }}
                 {% endif %}
 
