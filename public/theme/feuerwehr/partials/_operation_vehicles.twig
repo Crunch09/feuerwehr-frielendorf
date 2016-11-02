@@ -1,4 +1,5 @@
-{% set vehicles = record.related('vehicles') %}
+{% set vehicle_ids = record.relation.vehicles|join(" || ") %}
+{% setcontent vehicles = "vehicles" where { id: vehicle_ids } orderby 'position' %}
 {% set operation_vehicles = [] %}
 {% set departments = [] %}
 {% if intern %}
