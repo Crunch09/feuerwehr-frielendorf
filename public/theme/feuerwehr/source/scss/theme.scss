@@ -158,6 +158,18 @@ footer {
     &:hover{
       background-color: $accordion-item-background-hover;
     }
+
+    span.number{
+      float: left;
+      margin-right: .5rem;
+    }
+
+    span.title{
+      display: inline-block;
+      width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 

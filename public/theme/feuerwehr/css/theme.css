@@ -107,6 +107,14 @@ footer {
   text-overflow: ellipsis; }
   .operations-list li:hover {
     background-color: #e6e6e6; }
+  .operations-list li span.number {
+    float: left;
+    margin-right: .5rem; }
+  .operations-list li span.title {
+    display: inline-block;
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis; }
 
 .operations-block span {
   clear: both;
