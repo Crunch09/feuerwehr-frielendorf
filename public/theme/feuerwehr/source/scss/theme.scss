@@ -142,6 +142,9 @@ footer {
 
 // Operations stuff
 .operations-list{
+  a{
+    text-decoration: none;
+  }
   span.date{
     float: right;
   }
@@ -169,6 +172,12 @@ footer {
       width: 70%;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    span.operation-location{
+      display: block;
+      font-size: 75%;
+      font-style: italic;
     }
   }
 }

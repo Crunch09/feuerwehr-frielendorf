@@ -93,6 +93,9 @@ footer {
   .orbit-container li.orbit-slide {
     max-height: 100% !important; }
 
+.operations-list a {
+  text-decoration: none; }
+
 .operations-list span.date {
   float: right; }
 
@@ -115,6 +118,10 @@ footer {
     width: 70%;
     overflow: hidden;
     text-overflow: ellipsis; }
+  .operations-list li span.operation-location {
+    display: block;
+    font-size: 75%;
+    font-style: italic; }
 
 .operations-block span {
   clear: both;
