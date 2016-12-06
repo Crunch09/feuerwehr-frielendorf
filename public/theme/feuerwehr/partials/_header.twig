@@ -42,6 +42,12 @@
               </figcaption>
             </a>
           </li>
+        {% else %}
+        <li class="orbit-slide is-active">
+          <a href="">
+            <img class="orbit-image" src="{{headerimage}}" alt="Header image">
+          </a>
+        </li>
         {% endfor %}
       </ul>
     </div>
