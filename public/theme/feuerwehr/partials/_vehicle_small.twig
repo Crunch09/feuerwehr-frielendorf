@@ -12,7 +12,7 @@
   </div>
   <div class="small-12 medium-6 columns">
     <div class="media-object-section">
-      <h6>{{vehicle.title}} ({{vehicle.shorttitle}})</h6>
+      <h6>{{vehicle.title}} {% if vehicle.shorttitle is not empty %}({{vehicle.shorttitle}}){% endif %}</h6>
       {% if vehicle.radiocode is not empty %}
         <span><b>Funkrufname:</b> {{vehicle.radiocode}}</span></br>
       {% endif %}
