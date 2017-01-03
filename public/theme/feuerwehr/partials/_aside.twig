@@ -29,7 +29,7 @@
         {% setcontent records = "operations" orderby '-beginat' limit 5 %}
         <div class="callout">
           <div class="callout-header">
-            <h5>{{ __('contenttypes.operations.text.recent') }}</h5>
+            <h5>Letzte Einsätze</h5>
           </div>
           <ul class="no-bullet operations-block">
             {% for record in records %}
@@ -38,10 +38,10 @@
                 </span>{{ record.beginat|localedatetime('%d.%m.%Y %H:%M Uhr') }}</span>
               </li>
             {% else %}
-              <li>{{ __('contenttypes.operations.text.no-recent') }}</li>
+              <li>Keine Einsätze vorhanden</li>
             {% endfor %}
           </ul>
-          <p><a href="/operations">{{ __('contenttypes.operations.text.all') }}</a></p>
+          <p><a href="/operations">Alle Einsätze</a></p>
         </div>
 
 
