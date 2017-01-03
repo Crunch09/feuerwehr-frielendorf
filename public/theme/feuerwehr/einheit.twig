@@ -55,6 +55,8 @@
         {% setcontent entries = "entries" where { id: ids } allowpaging limit 5 %}
 
         {{ include('partials/_news.twig', { 'entries': entries })}}
+      {% else %}
+        <h2>Leider sind noch keine News vorhanden.</h2>
       {% endif %}
     </div>
   </div>
