@@ -13,6 +13,9 @@ main:
           contenttype: departments
       class: last
     - label: Fachgruppen
+      link: ''
+      display_on_positions:
+        - 0
       submenu:
         - label: Führungsstaffel
           path: page/fuehrungsstaffel
