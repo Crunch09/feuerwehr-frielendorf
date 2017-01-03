@@ -50,10 +50,12 @@
 {% if route == "departmentnews" or route == "contentlink" %}
   <div class="row">
     <div class="large-12 columns">
-      {% set ids = record.relation.entries|join(" || ") %}
-      {% setcontent entries = "entries" where { id: ids } allowpaging limit 5 %}
+      {% if record.relation.entries is defined %}
+        {% set ids = record.relation.entries|join(" || ") %}
+        {% setcontent entries = "entries" where { id: ids } allowpaging limit 5 %}
 
-      {{ include('partials/_news.twig', { 'entries': entries })}}
+        {{ include('partials/_news.twig', { 'entries': entries })}}
+      {% endif %}
     </div>
   </div>
 {% elseif route == "departmentactive" %}
@@ -128,7 +130,9 @@
     <div class="department-contact-info">
       <div class="row">
         <div class="small-12 columns"
-          <span>{{record.coordinates.formatted_address|replace({', Germany': ""})}}</span>
+          {% if record.coordinates.formatted_address is defined %}
+            <span>{{record.coordinates.formatted_address|replace({', Germany': ""})}}</span>
+          {% endif %}
         </div>
         <div class="small-12 columns">
           {% set mail_address = record.title|replace({'Feuerwehr ': ''})|lower %}
@@ -141,7 +145,7 @@
 {% endblock sub_main %}
 {% block bottomincludes %}
 
-  {% if record.coordinates.latitude and record.coordinates.longitude %}
+  {% if record.coordinates.latitude is defined and record.coordinates.longitude is defined %}
     <script>
       var map;
       var marker;
