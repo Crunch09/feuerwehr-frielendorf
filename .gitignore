@@ -1,3 +1,7 @@
 vendor
 app/cache
 app/database/bolt.db
+npm-debug.log
+public/theme/feuerwehr/source/bower_components
+public/theme/feuerwehr/source/node_modules
+.DS_Store
