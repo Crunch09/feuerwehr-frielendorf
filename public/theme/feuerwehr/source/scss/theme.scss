@@ -221,3 +221,7 @@ footer {
     line-height: 2.2rem;
   }
 }
+
+.menu a:hover{
+  background-color: $anchor-color-hover;
+}

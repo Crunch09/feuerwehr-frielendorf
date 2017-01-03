@@ -100,8 +100,8 @@ gulp.task('theme-sass', function() {
       browsers: COMPATIBILITY
     }))
     // If you _do_ want to compress this file on 'production', uncomment the the lines below.
-    // .pipe(minifycss)
-    // .pipe($.if(!isProduction, $.sourcemaps.write()))
+    .pipe(minifycss)
+    .pipe($.if(!isProduction, $.sourcemaps.write()))
     .pipe(gulp.dest('../css'));
 });
 
