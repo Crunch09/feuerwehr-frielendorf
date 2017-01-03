@@ -288,6 +288,9 @@ departments:
             required: true
             type: text
             class: large
+        slug:
+          type: slug
+          uses: title
         intern:
             type: checkbox
         description:
