@@ -391,7 +391,7 @@ departments:
         vehicles:
             multiple: true
             label: Fahrzeuge zuweisen
-            order: title
+            order: position
             format: '{{item.title}} ({{item.radiocode}})'
     show_on_dashboard: true
     viewless: false
