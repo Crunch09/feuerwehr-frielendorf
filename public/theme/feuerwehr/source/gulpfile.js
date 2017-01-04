@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var $    = require('gulp-load-plugins')();
+var concat = require('gulp-concat');
 var argv = require('yargs').argv;
 
 // Check for --production flag
@@ -80,8 +81,28 @@ gulp.task('foundation-sass', function() {
     .pipe($.autoprefixer({
       browsers: COMPATIBILITY
     }))
+    // If you _do_ want to compress this file on 'production', uncomment the the lines below.
     .pipe(minifycss)
     .pipe($.if(!isProduction, $.sourcemaps.write()))
+    .pipe(gulp.dest('../css'));
+});
+
+
+gulp.task('sass-compress-and-compile', function() {
+
+  var minifycss = $.if(isProduction, $.minifyCss());
+  return gulp.src(['scss/**/*.scss', '!scss/_settings.scss'])
+    .pipe($.sourcemaps.init())
+    .pipe($.sass({
+      includePaths: PATHS.sass
+    })
+      .on('error', $.sass.logError))
+    .pipe($.autoprefixer({
+      browsers: COMPATIBILITY
+    }))
+    .pipe(minifycss)
+    .pipe($.if(!isProduction, $.sourcemaps.write()))
+    .pipe(concat('style.min.css'))
     .pipe(gulp.dest('../css'));
 });
 
@@ -106,7 +127,7 @@ gulp.task('theme-sass', function() {
 });
 
 // Build the "dist" folder by running all of the above tasks
-gulp.task('build', ['javascript', 'foundation-sass', 'theme-sass']);
+gulp.task('build', ['javascript', 'sass-compress-and-compile']);
 
 
 gulp.task('default', ['javascript', 'foundation-sass', 'theme-sass'], function() {
