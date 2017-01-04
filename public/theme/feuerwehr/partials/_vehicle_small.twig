@@ -1,14 +1,29 @@
 <div class="media-object row">
   <div class="small-12 medium-6 columns">
-    <div class="media-object-section">
-      <div class="thumbnail">
-        {% if vehicle.imagelist is empty %}
-          <img src="https://dummyimage.com/250/000/fff.jpg&text=Bild+folgt">
-        {% else %}
-          <img src="{{ vehicle.imagelist[0]|thumbnail(250, 250) }}">
-        {% endif %}
+    {% if vehicle.imagelist|length < 2 %}
+      <div class="media-object-section">
+        <div class="thumbnail">
+          {% if vehicle.imagelist is empty %}
+            <img src="https://dummyimage.com/250/000/fff.jpg&text=Bild+folgt">
+          {% else %}
+            <img src="{{ vehicle.imagelist[0]|image() }}" alt="{{vehicle.imagelist[0].title}}">
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% else %}
+      <div class="orbit" role="region" aria-label="Vehicle Pictures" data-orbit
+        data-anim-out-from-left="hinge-out-from-top" data-anim-out-from-right="hinge-out-from-bottom" data-anim-in-from-left="hinge-in-from-left" data-anim-in-from-right="hinge-in-from-right">
+        <ul class="orbit-container">
+          <button class="orbit-previous"><span class="show-for-sr">Previous Image</span>&#9664;&#xFE0E;</button>
+          <button class="orbit-next"><span class="show-for-sr">Next Image</span>&#9654;&#xFE0E;</button>
+          {% for image in vehicle.imagelist %}
+            <li class="orbit-slide {% if loop.first %}is-active{% endif %}">
+              <img class="orbit-image" src="{{image|image()}}" alt="{{image.title}}">
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
   </div>
   <div class="small-12 medium-6 columns">
     <div class="media-object-section">
