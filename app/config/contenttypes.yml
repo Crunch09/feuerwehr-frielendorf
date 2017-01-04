@@ -274,7 +274,7 @@ vehicles:
             label: Bilder
             type: imagelist
     show_on_dashboard: true
-    viewless: false
+    viewless: true
     default_status: published
     searchable: false
     show_in_menu: Feuerwehr
