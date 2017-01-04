@@ -15,8 +15,12 @@
             {% if record.title is not defined and app.config.get('general/payoff') %} | {{ app.config.get('general/payoff') }}{% endif -%}
         </title>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="{{ paths.theme }}css/foundation.css">
-        <link rel="stylesheet" href="{{ paths.theme }}css/theme.css">
+        {% if config.get('general/production') %}
+          <link rel="stylesheet" href="{{ paths.theme }}css/style.min.css">
+        {% else %}
+          <link rel="stylesheet" href="{{ paths.theme }}css/foundation.css">
+          <link rel="stylesheet" href="{{ paths.theme }}css/theme.css">
+        {% endif %}
         <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
         <script>
           WebFont.load({
