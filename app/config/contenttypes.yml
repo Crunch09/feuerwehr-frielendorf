@@ -473,6 +473,98 @@ tasks:
     searchable: false
     default_status: published
     show_in_menu: Feuerwehr
+
+people:
+    name: Personen
+    singular_name: Person
+    fields:
+      task:
+        label: Amt
+        type: select
+        values: tasks/title
+        keys: internaltitle
+        sort: title
+        autocomplete: true
+      firstname:
+        label: Vorname
+        type: text
+        class: narrow
+      lastname:
+        label: Nachname
+        type: text
+        class: narrow
+      street:
+        label: Straße
+        type: text
+        variant: inline
+        class: narrow
+      houseno:
+        label: Hausnummer
+        type: text
+        variant: inline
+        class: narrow
+      zipcode:
+        label: PLZ
+        type: text
+        variant: inline
+        pattern: ^[0-9]{5}$
+        class: narrow
+      city:
+        label: Ort
+        type: text
+        variant: inline
+        class: narrow
+      email:
+        label: Email
+        variant: inline
+        type: text
+        class: narrow
+        pattern: email
+      phone:
+        label: Telefonnr.
+        variant: inline
+        type: text
+        class: narrow
+      profileimage:
+        label: Profilbild
+        type: image
+        extensions: [gif, jpg, png]
+      familystatus:
+        label: Familienstatus
+        variant: inline
+        type: text
+        class: narrow
+      children:
+        label: Kinder
+        type: text
+        variant: inline
+        class: narrow
+      job:
+        label: Beruf
+        type: text
+        variant: inline
+        class: narrow
+      rank:
+        label: Dienstgrad
+        type: text
+        variant: inline
+        class: narrow
+      history:
+        label: Werdegang
+        type: markdown
+      priortasks:
+        label: Dienststellungen
+        type: markdown
+      responsibilities:
+        label: Zuständige Sachgebiete
+        type: markdown
+    show_on_dashboard: false
+    viewless: false
+    searchable: true
+    show_in_menu: Feuerwehr
+    icon_one: "fa:user"
+    icon_many: "fa:users"
+    record_template: person.twig
 # Possible field types:
 #
 # text - varchar(256) - input type text.

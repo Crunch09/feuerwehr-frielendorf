@@ -1,0 +1,50 @@
+{% extends 'partials/_master.twig' %}
+
+{% block main %}
+    <h1>{{record.task}} {{record.firstname}} {{record.lastname}}</h1>
+
+    <table>
+       <tbody>
+        <tr>
+          <td>Kontakt</td>
+          <td>{{record.firstname}} {{record.lastname}}<br>
+              {{record.street}} {{record.houseno}}<br>
+              {{record.zipcode}} {{record.city}}<br>
+              Tel.: {{record.phone}}</br>
+              Mail.: {{ include('partials/_email.twig', { 'email': record.email }) }}
+          </td>
+        </tr>
+        <tr>
+          <td>Familienstand</td>
+          <td>{{record.familystatus}}</td>
+        </tr>
+        <tr>
+          <td>Kinder</td>
+          <td>{{record.children}}</td>
+        </tr>
+        <tr>
+          <td>Beruf</td>
+          <td>{{record.job}}</td>
+        </tr>
+        <tr>
+          <td>Dienstgrad</td>
+          <td>{{record.rank}}</td>
+        </tr>
+        <tr>
+          <td>Werdegang</td>
+          <td>{{record.history|markdown}}</td>
+        </tr>
+        <tr>
+          <td>Dienststellungen</td>
+          <td>{{record.priortasks|markdown}}</td>
+        </tr>
+        <tr>
+          <td>Zuständige Sachgebiete</td>
+          <td>{{record.responsibilities|markdown}}</td>
+        </tr>
+       </tbody>
+     </table>
+
+    {% include 'partials/_recordfooter.twig' with { 'record': record, 'extended': true } %}
+
+{% endblock main %}
