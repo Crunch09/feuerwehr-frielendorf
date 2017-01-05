@@ -6,7 +6,7 @@
           {% if vehicle.imagelist is empty %}
             <img src="https://dummyimage.com/250/000/fff.jpg&text=Bild+folgt">
           {% else %}
-            <img src="{{ vehicle.imagelist[0]|image() }}" alt="{{vehicle.imagelist[0].title}}">
+            <img src="{{ vehicle.imagelist[0]|thumbnail(250,250) }}" alt="{{vehicle.imagelist[0].title}}">
           {% endif %}
         </div>
       </div>
