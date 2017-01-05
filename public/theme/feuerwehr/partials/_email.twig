@@ -1,0 +1,2 @@
+{% set splitted_mail = email|split("@") %}
+<script>document.write("<a"+ " href='mailto:" +"{{splitted_mail[0]}}@" + "{{splitted_mail[1]}}" +"'>" + "{{splitted_mail[0]}}@" + "{{splitted_mail[1]}}" + "</a>")</script>

@@ -135,8 +135,8 @@
           {% endif %}
         </div>
         <div class="small-12 columns">
-          {% set mail_address = record.title|replace({'Feuerwehr ': ''})|lower %}
-          <span><script>document.write("<a"+ " href='mailto:" +"{{mail_address}}@" + "feuerwehr-frielendorf.de" +"'>" + "{{mail_address}}@" + "feuerwehr-frielendorf.de" + "</a>")</script></span>
+          {% set mail_address = record.title|replace({'Feuerwehr ': ''})|lower ~ "@feuerwehr-frielendorf.de" %}
+          <span>{{ include('partials/_email.twig', { 'email': mail_address }) }}</span>
         </div>
       </div>
     </div>

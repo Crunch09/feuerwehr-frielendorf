@@ -10,11 +10,10 @@
     </div>
   </div>
   <div class="media-object-section">
-    {% set splitted_mail = record.email|split("@") %}
     <h6>{{task}}</h6>
     <p>{{record.firstname}} {{record.lastname}}</br>
       {{record.street}} {{record.houseno}}, {{record.zipcode}} {{record.city}}</br>
       Tel.: {{record.phone}}</br>
-      Mail.: <script>document.write("<a"+ " href='mailto:" +"{{splitted_mail[0]}}@" + "{{splitted_mail[1]}}" +"'>" + "{{splitted_mail[0]}}@" + "{{splitted_mail[1]}}" + "</a>")</script></p>
+      Mail.: {{ include('partials/_email.twig', { 'email': record.email }) }}</p>
   </div>
 </div>
