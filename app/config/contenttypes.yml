@@ -278,6 +278,7 @@ vehicles:
     default_status: published
     searchable: false
     show_in_menu: Feuerwehr
+    sort: position
 
 departments:
     name: Einheiten
@@ -394,7 +395,7 @@ departments:
         vehicles:
             multiple: true
             label: Fahrzeuge zuweisen
-            order: position
+            order: title
             format: '{{item.title}} ({{item.radiocode}})'
     show_on_dashboard: true
     viewless: false
