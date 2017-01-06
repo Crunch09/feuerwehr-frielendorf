@@ -10,38 +10,56 @@
           <td>{{record.firstname}} {{record.lastname}}<br>
               {{record.street}} {{record.houseno}}<br>
               {{record.zipcode}} {{record.city}}<br>
-              Tel.: {{record.phone}}</br>
-              Mail.: {{ include('partials/_email.twig', { 'email': record.email }) }}
+              {% if record.phone is not empty %}
+                Tel.: {{record.phone}}</br>
+              {% endif %}
+              {% if record.email is not empty %}
+                Mail.: {{ include('partials/_email.twig', { 'email': record.email }) }}
+              {% endif %}
           </td>
         </tr>
-        <tr>
-          <td>Familienstand</td>
-          <td>{{record.familystatus}}</td>
-        </tr>
-        <tr>
-          <td>Kinder</td>
-          <td>{{record.children}}</td>
-        </tr>
-        <tr>
-          <td>Beruf</td>
-          <td>{{record.job}}</td>
-        </tr>
-        <tr>
-          <td>Dienstgrad</td>
-          <td>{{record.rank}}</td>
-        </tr>
-        <tr>
-          <td>Werdegang</td>
-          <td>{{record.history|markdown}}</td>
-        </tr>
-        <tr>
-          <td>Dienststellungen</td>
-          <td>{{record.priortasks|markdown}}</td>
-        </tr>
-        <tr>
-          <td>Zuständige Sachgebiete</td>
-          <td>{{record.responsibilities|markdown}}</td>
-        </tr>
+        {% if record.familystatus is not empty %}
+          <tr>
+            <td>Familienstand</td>
+            <td>{{record.familystatus}}</td>
+          </tr>
+        {% endif %}
+        {% if record.children is not empty %}
+          <tr>
+            <td>Kinder</td>
+            <td>{{record.children}}</td>
+          </tr>
+        {% endif %}
+        {% if record.job is not empty %}
+          <tr>
+            <td>Beruf</td>
+            <td>{{record.job}}</td>
+          </tr>
+        {% endif %}
+        {% if record.rank is not empty %}
+          <tr>
+            <td>Dienstgrad</td>
+            <td>{{record.rank}}</td>
+          </tr>
+        {% endif %}
+        {% if record.history is not empty %}
+          <tr>
+            <td>Werdegang</td>
+            <td>{{record.history|markdown}}</td>
+          </tr>
+        {% endif %}
+        {% if record.priortasks is not empty %}
+          <tr>
+            <td>Dienststellungen</td>
+            <td>{{record.priortasks|markdown}}</td>
+          </tr>
+        {% endif %}
+        {% if record.responsibilities is not empty %}
+          <tr>
+            <td>Zuständige Sachgebiete</td>
+            <td>{{record.responsibilities|markdown}}</td>
+          </tr>
+        {% endif %}
        </tbody>
      </table>
 
