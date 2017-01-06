@@ -12,6 +12,17 @@ main:
       list:
           contenttype: departments
       class: last
+    - label: Führung
+      link: ''
+      display_on_positions:
+        - 0
+      submenu:
+        - label: GBI Norbert Mühling
+          path: people/1
+        - label: Stellv. GBI Michael Bühn
+          path: people/2
+        - label: Stellv. GBI Markus Schmerer
+          path: people/3
     - label: Fachgruppen
       link: ''
       display_on_positions:
