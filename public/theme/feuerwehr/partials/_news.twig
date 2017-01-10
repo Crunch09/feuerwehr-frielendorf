@@ -3,7 +3,7 @@
     <article class="news-excerpts">
         <h3><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
 
-        {% if entry.imagelist[0] %}
+        {% if entry.imagelist is not empty and entry.imagelist[0] %}
           {% if loop.index0 is divisibleby(2) %}
             {% set float = "left" %}
           {% else %}

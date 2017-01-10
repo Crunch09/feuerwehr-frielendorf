@@ -53,7 +53,9 @@
       {% if record.relation.entries is defined %}
         {% set ids = record.relation.entries|join(" || ") %}
         {% setcontent entries = "entries" where { id: ids } allowpaging limit 5 %}
-
+        {% if entries|length == 1 and entries is not iterable %}
+          {% set entries = [entries] %}
+        {% endif %}
         {{ include('partials/_news.twig', { 'entries': entries })}}
       {% else %}
         <h2>Leider sind noch keine News vorhanden.</h2>

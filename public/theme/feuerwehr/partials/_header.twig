@@ -26,7 +26,7 @@
         {% for element in random_elements %}
           <li class="orbit-slide {% if loop.first %}is-active{% endif %}">
             <a href="{{ element.link }}">
-              {% if element.imagelist[0] %}
+              {% if element.imagelist is not empty and element.imagelist[0] %}
                 <img class="orbit-image" src="{{ image(element.imagelist[0].filename) }}" alt="{{ element.imagelist[0].filename }}">
               {% else %}
                 <img class="orbit-image" src="{{headerimage}}" alt="Header image">
