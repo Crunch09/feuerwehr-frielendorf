@@ -20,8 +20,7 @@
   </div>
 
   <div class="homepage-entries">
-    {% setcontent entries = "entries" where { categories: "Startseite" } allowpaging limit 5 %}
-    {{ include('partials/_news.twig', { 'entries': entries })}}
+    {{ include('partials/_homepage_entries.twig') }}
   </div>
 
   <script type="text/javascript">

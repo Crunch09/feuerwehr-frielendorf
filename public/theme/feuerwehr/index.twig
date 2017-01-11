@@ -2,7 +2,6 @@
 
 {% block main %}
 
-{% setcontent entries = "entries" where { categories: "Startseite" } allowpaging limit 5 %}
-{{ include('partials/_news.twig', { 'entries': entries })}}
+{{ include('partials/_homepage_entries.twig') }}
 
 {% endblock main %}
