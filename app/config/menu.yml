@@ -32,6 +32,10 @@ main:
           path: page/fuehrungsstaffel
         - label: ArGe Atemschutz
           path: page/arge-atemschutz
+    - label: Grußwort
+      path: page/grusswort
+      display_on_positions:
+        - 0
     - label: Impressum
       path: page/Impressum
       display_on_positions:
