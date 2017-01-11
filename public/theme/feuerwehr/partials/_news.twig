@@ -1,24 +1,30 @@
 {% for entry in entries %}
-  <div class="large-6 columns">
-    <article class="news-excerpts">
-        <h3><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
+  {% if loop.index0 is divisibleby(2) %}
+    <div class="row">
+  {% endif %}
+    <div class="large-6 columns">
+      <article class="news-excerpts">
+          <h3><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
 
-        {% if entry.imagelist is not empty and entry.imagelist[0] %}
-          {% if loop.index0 is divisibleby(2) %}
-            {% set float = "left" %}
-          {% else %}
-            {% set float = "right" %}
+          {% if entry.imagelist is not empty and entry.imagelist[0] %}
+            {% if loop.index0 is divisibleby(2) %}
+              {% set float = "left" %}
+            {% else %}
+              {% set float = "right" %}
+            {% endif %}
+            <img style="float: {{float}};" src="{{thumbnail(entry.imagelist[0].filename)}}">
           {% endif %}
-          <img style="float: {{float}};" src="{{thumbnail(entry.imagelist[0].filename)}}">
-        {% endif %}
-        {{ entry.excerpt }}
+          {{ entry.excerpt }}
 
-        <p class="meta"><a href="{{ entry.link }}">Mehr...</a> -
-        Verfasst von {{ entry.user.displayname }}
-        am {{ entry.datepublish|date("d.m.Y")}}</p>
+          <p class="meta"><a href="{{ entry.link }}">Mehr...</a> -
+          Verfasst von {{ entry.user.displayname }}
+          am {{ entry.datepublish|date("d.m.Y")}}</p>
 
-    </article>
-  </div>
+      </article>
+    </div>
+  {% if loop.index0 is not divisibleby(2) or loop.last %}
+    </div> {# /row #}
+  {% endif %}
 {% else %}
   <h2>Leider sind noch keine News vorhanden.</h2>
 {% endfor %}
