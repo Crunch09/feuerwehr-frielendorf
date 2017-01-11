@@ -30,18 +30,24 @@
         <td>Einsatzleiter</td>
         <td>{{record.incidentcommander}}</td>
       </tr>
-      {% include 'partials/_operation_vehicles.twig' with { 'intern': true, 'record': record } %}
-      {% include 'partials/_operation_vehicles.twig' with { 'intern': false, 'record': record } %}
-      <tr>
-        <td colspan="2">
-          <div id="map" style="width: 100%; height: 300px;"></div>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          {{record.description|markdown}}
-        </td>
-      </tr>
+      {% if record.relation is not null %}
+        {% include 'partials/_operation_vehicles.twig' with { 'intern': true, 'record': record } %}
+        {% include 'partials/_operation_vehicles.twig' with { 'intern': false, 'record': record } %}
+      {% endif %}
+      {% if record.coordinates is not empty and record.coordinates.latitude and record.coordinates.longitude %}
+        <tr>
+          <td colspan="2">
+            <div id="map" style="width: 100%; height: 300px;"></div>
+          </td>
+        </tr>
+      {% endif %}
+      {% if record.description is not empty %}
+        <tr>
+          <td colspan="2">
+            {{record.description|markdown}}
+          </td>
+        </tr>
+      {% endif %}
      </tbody>
    </table>
    {% include 'partials/_imagelist_popup.twig' with { 'record': record } %}
@@ -55,7 +61,7 @@
 
 {% block bottomincludes %}
 
-  {% if record.coordinates.latitude and record.coordinates.longitude %}
+  {% if record.coordinates is not empty and record.coordinates.latitude and record.coordinates.longitude %}
     <script>
       var map;
       var marker;
