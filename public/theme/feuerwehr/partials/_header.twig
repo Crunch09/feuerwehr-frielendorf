@@ -14,7 +14,7 @@
 {% if app.request.get("_route") == "homepage" %}
   {% set random_no = random(5) %}
   {% setcontent random_news = "entries/random/" ~ random_no where { datepublish: '>last month' } %}
-  {% setcontent random_operations = "operations/random/" ~ (5 - random_news|length) where {datepublish: '>last month'} %}
+  {% setcontent random_operations = "operations/random/" ~ (5 - random_news|length) where {beginat: '>last month'} %}
 
   {% set random_elements = random_news | merge(random_operations) %}
   <div class="large-12 columns">
