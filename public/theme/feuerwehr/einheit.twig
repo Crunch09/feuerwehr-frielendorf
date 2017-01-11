@@ -52,7 +52,7 @@
     <div class="large-12 columns">
       {% if record.relation.entries is defined %}
         {% set ids = record.relation.entries|join(" || ") %}
-        {% setcontent entries = "entries" where { id: ids } allowpaging limit 5 %}
+        {% setcontent entries = "entries" where { id: ids } allowpaging limit 6 %}
         {% if entries|length == 1 and entries is not iterable %}
           {% set entries = [entries] %}
         {% endif %}
