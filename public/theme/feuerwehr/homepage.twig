@@ -4,7 +4,14 @@
   <article class="greeting" style="display: none;">
     <h2 style="text-align: center;">{{record.title}}</h2>
 
-    <div style="position: relative; height: 180px;">ALLE BRAUCHEN</br>DIE FEUERWEHR</br>BRAUCHT DICH<img class="image" src="{{record.image|image()}}" style="width: 240px; position: absolute; top: 0; right: 0;" alt="Header image"></div>
+    <div class="row">
+      <div class="small-6 columns">
+        <div style="position: relative;">ALLE BRAUCHEN</br>DIE FEUERWEHR</br>BRAUCHT DICH</div>
+      </div>
+      <div class="small-6 columns">
+        <img class="image" src="{{record.image|image()}}" style="position: relative;" alt="Header image">
+      </div>
+    </div>
     {{ record.body|markdown }}
     {% set signature = paths.theme ~ 'images/signature.png' %}
     Herzlichst<br>
