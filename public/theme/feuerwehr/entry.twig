@@ -1,5 +1,13 @@
 {% extends 'partials/_master.twig' %}
-
+{% block headincludes %}
+  <meta property="og:url" content="{{paths.canonicalurl}}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{record.title}}" />
+  <meta property="og:description" content="{{record.teaser|markdown}}" />
+  {% if record.imagelist is not empty %}
+    <meta property="og:image" content="{{paths.hosturl}}{{record.imagelist[0]|image}}" />
+  {% endif %}
+{% endblock headincludes %}
 {% block main %}
 
 <article>

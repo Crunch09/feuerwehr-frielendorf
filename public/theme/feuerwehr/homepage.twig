@@ -1,5 +1,11 @@
 {% extends 'partials/_master.twig' %}
-
+{% block headincludes %}
+  <meta property="og:url" content="{{paths.rooturl}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Feuerwehr der Gemeinde Frielendorf" />
+  <meta property="og:description" content="Hier finden Sie alle Informationen zu den Feuerwehren der Gemeinde Frielendorf." />
+  <meta property="og:image" content="{{paths.hosturl}}{{paths.theme ~ 'images/header/' ~ theme.headerimage[0]}}" />
+{% endblock headincludes %}
 {% block main %}
   <article class="greeting" style="display: none;">
     <h2 style="text-align: center;">{{record.title}}</h2>
