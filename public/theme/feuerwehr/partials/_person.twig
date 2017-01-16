@@ -1,11 +1,11 @@
 <div class="media-object">
   <div class="media-object-section">
     <div class="thumbnail">
-      {% if record.profileimage.file is null %}
+      {% if record.profileimage.value.file is empty %}
         {% set image_url = paths.theme ~ "images/logo_ea.gif" %}
         <img src="{{image_url}}">
       {% else %}
-        {{ record.image|thumbnail(480, 480) }}
+        {{popup(record.profileimage.value)}}
       {% endif %}
     </div>
   </div>
