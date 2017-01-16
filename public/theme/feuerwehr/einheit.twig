@@ -74,7 +74,7 @@
         {{ include('partials/_person.twig', { 'record': ap, 'task': 'Stellv. Wehrführer/in' }) }}
       {% endfor %}
       {% if record.schedule %}
-        Aktueller Dienstplan: <a href="/files/{{record.schedule}}">Download</a>
+        <b>Aktueller Dienstplan:</b> <a href="/files/{{record.schedule}}">Download</a>
       {% endif %}
     </div>
   </div>
