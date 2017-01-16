@@ -3,15 +3,29 @@
 {# You can either hardcode the filename for the header, or take a value from the current
    content in 'record', or - as we do in this example - take a random one from the list
    in the /theme/foundation/theme.yml file. #}
-{% if record is defined and record and record.contenttype.slug == "departments" and record.image %}
-  {% set headerimage_low = record.image|image() %}
-  {% set headerimage = record.image|image() %}
+{% set route = app.request.get('_route') %}
+{% set department_header = null %}
+{% if route == "departmentnews" or route == "contentlink"%}
+{% set department_header = record.headerimagenews %}
+{% elseif route == "departmentactive" %}
+{% set department_header = record.headerimageactive %}
+{% elseif route == "departmentyouth" %}
+{% set department_header = record.headerimageyouth %}
+{% elseif route == "departmentchildren"%}
+{% set department_header = record.headerimagechildren %}
+{% elseif route == "departmentvehicles"%}
+{% set department_header = record.headerimagevehicles %}
+{% endif %}
+
+{% if record is defined and record and record.contenttype.slug == "departments" and department_header %}
+  {% set headerimage_low = department_header|image() %}
+  {% set headerimage = department_header|image() %}
 {% else %}
   {% set headerimage_low = paths.theme ~ 'images/header/' ~ random(theme.headerimage) %}
   {% set headerimage = paths.theme ~ 'images/header/' ~ random(theme.headerimage) %}
 {% endif %}
 
-{% if app.request.get("_route") == "homepage" %}
+{% if route == "homepage" %}
   {% set random_no = random(5) %}
   {% setcontent random_news = "entries/random/" ~ random_no where { datepublish: '>last month' } %}
   {% setcontent random_operations = "operations/random/" ~ (5 - random_news|length) where {beginat: '>last month'} %}

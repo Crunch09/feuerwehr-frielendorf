@@ -301,10 +301,6 @@ departments:
         description:
             label: Beschreibung
             type: markdown
-        image:
-            label: Bild
-            type: image
-            group: Erweitert
         facebook:
             label: Facebook-URL
             type: text
@@ -343,6 +339,26 @@ departments:
         showchildren:
             label: Kinderfeuerwehr anzeigen
             type: checkbox
+            group: Anzeige
+        headerimagenews:
+            label: Header - News
+            type: image
+            group: Anzeige
+        headerimageactive:
+            label: Header - Einsatzabteilung
+            type: image
+            group: Anzeige
+        headerimageyouth:
+            label: Header - Jugendfeuerwehr
+            type: image
+            group: Anzeige
+        headerimagechildren:
+            label: Header - Kinderfeuerwehr
+            type: image
+            group: Anzeige
+        headerimagevehicles:
+            label: Header - Fahrzeuge
+            type: image
             group: Anzeige
         appointes:
             label: Amtsträger
