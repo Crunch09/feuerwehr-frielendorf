@@ -131,7 +131,7 @@
     {% endif %}
     <div class="department-contact-info">
       <div class="row">
-        <div class="small-12 columns"
+        <div class="small-12 columns">
           {% if record.coordinates.formatted_address is defined %}
             <span>{{record.coordinates.formatted_address|replace({', Germany': ""})}}</span>
           {% endif %}
