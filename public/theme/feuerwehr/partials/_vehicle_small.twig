@@ -1,12 +1,12 @@
 <div class="media-object row">
   <div class="small-12 medium-6 columns">
     {% if vehicle.imagelist|length < 2 %}
-      <div class="media-object-section">
+      <div class="media-object-section" style="max-width: 100%;">
         <div class="thumbnail">
           {% if vehicle.imagelist is empty %}
             <img src="https://dummyimage.com/250/000/fff.jpg&text=Bild+folgt">
           {% else %}
-            <img src="{{ vehicle.imagelist[0]|thumbnail(250,250) }}" alt="{{vehicle.imagelist[0].title}}">
+            <img src="{{ vehicle.imagelist[0]|thumbnail(552, 552) }}" alt="{{vehicle.imagelist[0].title}}" style="max-width: 100%;">
           {% endif %}
         </div>
       </div>
