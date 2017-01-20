@@ -19,10 +19,6 @@
 
     {% include 'partials/_imagelist_popup.twig' with { 'record': record } %}
 
-    <p class="meta"><a href="{{ record.link }}">Link</a> -
-        Verfasst von {{ record.user.displayname }}
-        am {{ record.datepublish|date("d.M.Y")}}</p>
-
 </article>
 
     {% include 'partials/_recordfooter.twig' with { 'record': record, 'extended': true } %}
