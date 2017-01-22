@@ -7,55 +7,7 @@
   <meta property="og:image" content="{{paths.hosturl}}{{paths.theme ~ 'images/header/' ~ theme.headerimage[0]}}" />
 {% endblock headincludes %}
 {% block main %}
-  <article class="greeting" style="display: none;">
-    <h2 style="text-align: center;">{{record.title}}</h2>
 
-    <div class="row">
-      <div class="small-6 columns">
-        <div style="position: relative;">ALLE BRAUCHEN</br>DIE FEUERWEHR</br>BRAUCHT DICH</div>
-      </div>
-      <div class="small-6 columns">
-        <img class="image" src="{{record.image|image()}}" style="position: relative;" alt="Header image">
-      </div>
-    </div>
-    {{ record.body|markdown }}
-    {% set signature = paths.theme ~ 'images/signature.png' %}
-    Herzlichst<br>
-    Ihr<br>
-    <img class="image" src="{{signature}}" style="margin-left: 0" alt="Signature">
-    Thorsten Vaupel<br>Bürgermeister
-  </article>
+{{ include('partials/_homepage_entries.twig') }}
 
-  <div class="row" id="toNews" style="display: none;">
-    <div style="text-align: center;" class="small-12">
-      <button type="button" class="button">Zu den News</button>
-    </div>
-  </div>
-
-  <div class="homepage-entries">
-    {{ include('partials/_homepage_entries.twig') }}
-  </div>
-
-  <script type="text/javascript">
-    const greeting = document.querySelector('.greeting')
-    const homepageEntries = document.querySelector('.homepage-entries');
-    const toNewsBtn = document.querySelector("#toNews");
-    const myStorage = window.localStorage;
-    const greetingHidden = myStorage.getItem("greeting-hidden");
-
-    if(greetingHidden == null){
-      greeting.style.display = "block";
-      homepageEntries.style.display = "none";
-      toNewsBtn.style.display = "block";
-    }
-
-    toNewsBtn.addEventListener("click", function(event){
-
-      greeting.style.display = "none";
-      homepageEntries.style.display = "block";
-      event.target.style.display = "none";
-
-      myStorage.setItem("greeting-hidden", "true");
-    });
-  </script>
 {% endblock main %}
