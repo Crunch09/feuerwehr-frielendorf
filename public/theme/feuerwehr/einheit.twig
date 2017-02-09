@@ -137,7 +137,7 @@
           {% endif %}
         </div>
         <div class="small-12 columns">
-          {% set mail_address = record.title|replace({'Feuerwehr ': ''})|lower ~ "@feuerwehr-frielendorf.de" %}
+          {% set mail_address = record.title|replace({'Feuerwehr ': '', 'ß':'ss'})|lower ~ "@feuerwehr-frielendorf.de" %}
           <span>{{ include('partials/_email.twig', { 'email': mail_address }) }}</span>
         </div>
       </div>
