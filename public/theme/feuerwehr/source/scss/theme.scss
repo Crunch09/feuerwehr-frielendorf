@@ -136,8 +136,13 @@ footer {
 
 .orbit-container {
   max-height: 50vh;
+  height: 50vh !important;
   li.orbit-slide {
     max-height: 100% !important;
+  }
+
+  figcaption{
+    max-height: 100%;
   }
 }
 
