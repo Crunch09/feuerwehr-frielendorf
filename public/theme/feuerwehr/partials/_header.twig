@@ -20,6 +20,9 @@
 {% if record is defined and record and record.contenttype.slug == "departments" and department_header %}
   {% set headerimage_low = department_header|image() %}
   {% set headerimage = department_header|image() %}
+{% elseif record is defined and record and record.contenttype.slug == "entries" and entry_header is defined %}
+  {% set headerimage_low = entry_header|image() %}
+  {% set headerimage = entry_header|image() %}
 {% else %}
   {% set headerimage_low = paths.theme ~ 'images/header/' ~ random(theme.headerimage) %}
   {% set headerimage = paths.theme ~ 'images/header/' ~ random(theme.headerimage) %}

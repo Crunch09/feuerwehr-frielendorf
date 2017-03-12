@@ -1,3 +1,6 @@
+{% if record.imagelist is not empty %}
+  {% set entry_header = record.imagelist[0] %}
+{% endif %}
 {% extends 'partials/_master.twig' %}
 {% block headincludes %}
   <meta property="og:url" content="{{paths.canonicalurl}}" />
