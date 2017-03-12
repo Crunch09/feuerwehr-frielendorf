@@ -2,7 +2,7 @@
 # details: https://docs.bolt.cm/configuration/menus
 
 main:
-    - label: Startseite
+    - label: Feuerwehr Frielendorf
       path: homepage
       class: first
     - label: Einsätze
