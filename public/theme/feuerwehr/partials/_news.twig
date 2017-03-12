@@ -12,7 +12,9 @@
             {% else %}
               {% set float = "right" %}
             {% endif %}
-            <img style="float: {{float}};" src="{{thumbnail(entry.imagelist[0].filename)}}">
+            <a href="{{image(entry.imagelist[0].filename)}}" class="magnific" title="{{entry.imagelist[0].title}}">
+              <img style="float: {{float}};" src="{{thumbnail(entry.imagelist[0].filename)}}" title="{{entry.imagelist[0].title}}">
+            </a>
           {% endif %}
           {{ entry.excerpt }}
 
